@@ -1,8 +1,9 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import spacy
 
-from airmopss_utils import *
+from utils import *
 
 def get_labels(pipeline: object = "ner", model: object = "en_core_web_sm") -> object:
     """

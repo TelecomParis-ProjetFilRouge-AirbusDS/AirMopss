@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 def get_stop_sentences():
     stops = [ s for l in _stop_sentences for s in l ]
