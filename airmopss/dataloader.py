@@ -9,11 +9,11 @@ import spacy
 class DataLoader():
     def __init__(self, config):
 
-        self.data = self.get_data(config.csv_file)
+        self.data = self.load_data(config.csv_file, config.labelled_only)
         self.labels = self.load_labels(config.labels_file)
         self.pipeline = self.get_pipeline(config.pipeline)
 
-    def get_data(self, csv_file):
+    def load_data(self, csv_file, labelled_only):
         """
         Returns a tuple of titles, descriptions, articles from csv file
         :param csv_file:
@@ -24,12 +24,17 @@ class DataLoader():
         titles = []
 
         df = pd.read_csv(csv_file)
-        labelled_art = [101, 102, 105, 107, 108, 120, 125, 127, 129, 134, 137, 142, 145, 151, 156, 160, 172, 180, 188, 196, 301, 304, 306, 308, 309, 312]
 
-        for i in labelled_art:
-            articles.append(df.iloc[i]["content_y"])
-            descriptions.append(df.iloc[i]["description"])
-            titles.append(df.iloc[i]["title"])
+        if labelled_only:
+            art_ids = [101, 102, 105, 107, 108, 120, 125, 127, 129, 134, 137, 142, 145, 151, 156, 160, 172, 180, 188, 196, 301, 304, 306, 308, 309, 312]
+        else:
+            # TODO check len(df) matched art ids if needed
+            art_ids = range(len(df))
+
+        for idx in art_ids:
+            articles.append(df.iloc[idx]["content_y"])
+            descriptions.append(df.iloc[idx]["description"])
+            titles.append(df.iloc[idx]["title"])
 
         return [titles, descriptions, articles]
 
