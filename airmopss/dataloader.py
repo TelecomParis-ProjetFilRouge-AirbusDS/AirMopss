@@ -10,6 +10,7 @@ class DataLoader():
     def __init__(self, config):
 
         self.data = self.get_data(config.csv_file)
+        self.labels = self.load_labels(config.labels_file)
         self.pipeline = self.get_pipeline(config.pipeline)
 
     def get_data(self, csv_file):
@@ -31,6 +32,15 @@ class DataLoader():
             titles.append(df.iloc[i]["title"])
 
         return [titles, descriptions, articles]
+
+    def load_labels(self, json_file):
+        """
+        Opens JSON file of labels
+
+        """
+        with open(json_file) as f:
+            data = json.load(f)
+        return data
 
     def get_pipeline(self, pipeline):
         return spacy.load(pipeline)

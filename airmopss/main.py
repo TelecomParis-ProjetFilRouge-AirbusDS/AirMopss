@@ -34,6 +34,7 @@ def main(config):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--csv_file', type=str, default='data/newsdata.csv')
+    parser.add_argument('--labels_file', type=str, default='data/newsdata_labels.txt')
     parser.add_argument('--pipeline', type=str, default='en_core_web_sm')
     parser.add_argument('--task', type=str, default='extract_np')
 
