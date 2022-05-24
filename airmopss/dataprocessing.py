@@ -3,17 +3,23 @@
 
 from preprocess import *
 from spacy_utils import *
+from qaprocessing import QaProcessing
 
 class DataProcessing():
     def __init__(self, config, data_loader):
+        self.config = config
         self.data = data_loader.data
         self.pipeline = data_loader.pipeline
+        
+        if "qa" == config.task:
+            self.qa = QaProcessing(config, data_loader)
+
 
     def run(self, task="extract_np"):
         if task == "extract_np":
             self._extract_np()
         elif task == "qa":
-            self._extract_qa()
+            self.qa.process()
         elif task == "version":
             print("Versions:")
             print("Spacy", spacy.__version__)
@@ -73,8 +79,4 @@ class DataProcessing():
             # displacy.serve(doc, host="localhost", port=5000, style='ent')  # visualisation de la NER
             # displacy.serve(doc, host="localhost", port=5001, style='dep')  # visualisation de la NER
 
-    def _extract_qa(self):
-        while True:
-            q = input("Enter a question: ")
-            if q == "#": break
-            print(q)
+

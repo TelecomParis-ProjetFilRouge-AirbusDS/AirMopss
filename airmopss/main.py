@@ -37,7 +37,7 @@ if __name__ == '__main__':
     parser.add_argument('--csv_file', type=str, default='data/newsdata.csv')
     parser.add_argument('--labels_file', type=str, default='data/newsdata_labels.txt')
     parser.add_argument('--pipeline', type=str, default='en_core_web_sm')
-    parser.add_argument('--task', type=str, default='extract_np')
+    parser.add_argument('--task', type=str, default='qa')
     parser.add_argument('--labelled_only', type=utils.str2bool, default=True, help="Loads all data or labelled ones only")
 
     config = parser.parse_args()
