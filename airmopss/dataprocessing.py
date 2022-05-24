@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from preprocess import *
+from preprocessing import *
 from spacy_utils import *
 from qaprocessing import QaProcessing
 
