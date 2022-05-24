@@ -3,6 +3,7 @@
 
 import pandas as pd
 import spacy
+import json
 
 #pipelines = ["tok2vec", "tagger", "parser", "ner"]
 
