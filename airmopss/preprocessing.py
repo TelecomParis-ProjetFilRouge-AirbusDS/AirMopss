@@ -12,7 +12,10 @@ stop_sentences_reuters = [
 stop_sentences_any = [
     "Advertisement",
     "Get in touch",
-    "Go to https://apnews.com/hub/russia-ukraine for more coverage"
+    "Go to https://apnews.com/hub/russia-ukraine for more coverage",
+    "Share on Twitter",
+    "Share via Email",
+    "Share on Facebook"
 ]
 
 _stop_sentence_patterns = [
@@ -25,8 +28,8 @@ _stop_sentence_patterns = [
     "Reporting by Stanley Widianto and Angie Teo Writing by Ed Davies Editing by Kanupriya Kapoor",
     "Reporting by Nidhi Verma; Editing by Aditya Soni",
     "Reporting by Phuong Nguyen Editing by Ed Davies",
-    "Reporting by Jarrett Renshaw on aboard Afir Force One and Trevor Hunnicutt in Washington; Additional reporting by Alexandra Alper; Editing by Heather Timmons, Mary Milliken and Cynthia Osterman"
-
+    "Reporting by Jarrett Renshaw on aboard Afir Force One and Trevor Hunnicutt in Washington; Additional reporting by Alexandra Alper; Editing by Heather Timmons, Mary Milliken and Cynthia Osterman",
+    "Show caption......",
 ]
 _stop_sentences = [
     stop_sentences_reuters,
