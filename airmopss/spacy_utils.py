@@ -3,7 +3,7 @@
 
 import spacy
 
-from utils import *
+from .utils import *
 
 def get_labels(pipeline: object = "ner", model: object = "en_core_web_sm") -> object:
     """

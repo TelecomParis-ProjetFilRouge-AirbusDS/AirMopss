@@ -3,22 +3,9 @@
 
 import argparse
 
-from dataloader import DataLoader
-from dataprocessing import DataProcessing
-import utils
-
-# import os, sys
-#
-# import spacy
-# from spacy import displacy
-#
-# import numpy as np
-# import json
-# from pprint import pprint
-#
-# import transformers
-# from transformers import pipeline
-# from transformers import PegasusTokenizer, PegasusForConditionalGeneration
+from airmopss import DataLoader
+from airmopss import DataProcessing
+from airmopss import utils
 
 def main(config):
     # load data
@@ -26,8 +13,9 @@ def main(config):
 
     # process
     data_processor = DataProcessing(config, data_loader)
-    data_processor.run()
-    data_processor.run(task="summarize")
+
+    #data_processor.run()
+    #data_processor.run(task="summarize")
     data_processor.run(task="qa")
 
     #create_ner_module("geopolitics_ner")
@@ -39,7 +27,6 @@ if __name__ == '__main__':
     parser.add_argument('--pipeline', type=str, default='en_core_web_sm')
     parser.add_argument('--task', type=str, default='qa')
     parser.add_argument('--labelled_only', type=utils.str2bool, default=True, help="Loads all data or labelled ones only")
-
     config = parser.parse_args()
 
     main(config)

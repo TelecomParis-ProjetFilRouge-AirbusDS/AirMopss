@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from preprocessing import *
-from spacy_utils import *
-from qaprocessing import QaProcessing
+from .qaprocessing import QaProcessing
+from .preprocessing import *
+from .spacy_utils import *
+from .utils import *
 
 class DataProcessing():
     def __init__(self, config, data_loader):
