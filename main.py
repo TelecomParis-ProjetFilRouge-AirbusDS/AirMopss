@@ -21,12 +21,12 @@ def main(config):
     #create_ner_module("geopolitics_ner")
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--csv_file', type=str, default='data/newsdata.csv')
-    parser.add_argument('--labels_file', type=str, default='data/newsdata_labels.txt')
-    parser.add_argument('--pipeline', type=str, default='en_core_web_sm')
-    parser.add_argument('--task', type=str, default='qa')
-    parser.add_argument('--labelled_only', type=utils.str2bool, default=True, help="Loads all data or labelled ones only")
+    parser = argparse.ArgumentParser(description="How to launch airmopps")
+    parser.add_argument('--csv_file', type=str, default='data/newsdata.csv', help="file of news wires (api format), default: data/newsdata.txt")
+    parser.add_argument('--labels_file', type=str, default='data/newsdata_labels.txt', help="file of labeled articles, default: data/newsdata_labels.txt")
+    parser.add_argument('--pipeline', type=str, default='en_core_web_sm', help="chose spacy pipeline to use [en_core_web_sm], default: en_core_web_sm")
+    parser.add_argument('--task', type=str, default='qa', help="task to run [qa|summarize|extract_np|version], default: qa")
+    parser.add_argument('--labelled_only', type=utils.str2bool, default=True, help="loads all data or labelled ones only, default: True")
     config = parser.parse_args()
 
     main(config)
