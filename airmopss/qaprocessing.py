@@ -14,6 +14,10 @@ from transformers import pipeline
 class QaProcessing():
     def __init__(self, config, data_loader):
         self.data = data_loader.data
+
+        # ugly hack
+        self.df = data_loader.data_df
+
         self.pipeline = data_loader.pipeline
         self.qa_pipeline = pipeline("question-answering")  # , model="distilbert-base-cased-distilled-squad", tokenizer="bert-base-cased")
 
@@ -44,55 +48,83 @@ class QaProcessing():
             if q == "#": break
             print(q)
 
+    def get_gn_subjs(self, doc):
+        # Extraire l'ensemble des groupes nominaux et qui soient dans ['GPE', 'PERSON', 'ORG', 'NORP']
+        np_list_subj = []
+        for word in doc:
+            if word.dep_ == 'nsubj' and word.pos_ not in ['PRON']:
+                word_subtree = word.subtree
+                flag = False
+                for elt in word_subtree:
+                    flag = flag or elt.ent_type_ in ['GPE', 'PERSON', 'ORG', 'NORP']
+                if flag:
+                    np_list_subj.append([elt for elt in word.subtree])
+
+        # reconcatene en liste de string
+        gn_subj = [" ".join([str(elt) for elt in GN]).strip() for GN in np_list_subj]
+        gn_subj = list(dict.fromkeys(gn_subj))
+
+        return gn_subj
+
+    def preprocess(self, idx):
+        # To merge with preprocessing.py
+        article = self.df.iloc[idx].content_y
+
+        article = clean_text(article)
+
+        start = self.df.iloc[idx].content_y.find(self.df.iloc[idx].content_x[:50])
+        if start != -1:
+            article = article[start:]
+
+        clean_article_regex = re.sub("\n\S+\n\n+", "\n", article)
+        clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
+        paragraphs = clean_article_regex.split('\n')
+        paragraphs = [paragraph for paragraph in paragraphs if (len(paragraph.split(' ')) > 10
+                                                                and "Show caption" not in paragraph
+                                                                and "Getty images" not in paragraph
+                                                                and "@" not in paragraph)]
+        return paragraphs, article
+
     def process(self):
-        articles = self.data[2]
+        #articles = self.data[2]
 
-        for idx in [0]:
-            clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
-            clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
+        for idx in [101]:
 
-            doc = self.pipeline(clean_article_regex)
-            deps = [word.dep_ for word in doc]  # extrait les dépendances entre les entités
-            ents = list(doc.ents)  # doc.ents extrait les entités nommées
+            #clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
+            #clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
+            paragraphs, article = self.preprocess(idx)
 
-            # Extraire l'ensemble des groupes nominaux et qui soient dans ['GPE', 'PERSON', 'ORG', 'NORP']
-            np_list_subj = []
-            for word in doc:
-                if word.dep_ == 'nsubj' and word.pos_ not in ['PRON']:
-                    word_subtree = word.subtree
-                    flag = False
-                    for elt in word_subtree:
-                        flag = flag or elt.ent_type_ in ['GPE', 'PERSON', 'ORG', 'NORP']
-                    if flag:
-                        np_list_subj.append([elt for elt in word.subtree])
+            for paragraph in paragraphs:
 
+                #print(paragraph, end='\n\n')
 
-            print(doc, '\n')
+                doc = self.pipeline(paragraph)
 
-            gn_subj = [" ".join([str(elt) for elt in GN]).strip() for GN in np_list_subj]
-            gn_subj = list(dict.fromkeys(gn_subj))
+                gn_subj = self.get_gn_subjs(doc)
 
-            for GN in gn_subj:
+                print(doc, '\n')
 
-                scores = {'what': 5e-3, 'who': 5e-3, 'when': 5e-2, 'where': 5e-2}
-                # preds = {'what':None, 'who':None, 'when':None, 'where':None}
-                preds = {'what': "XXX", 'who': GN, 'when': "XXX", 'where': "XXX"}
+                for GN in gn_subj:
 
-                for idx, question in enumerate(self.questions):
+                    scores = {'what': 5e-3, 'who': 5e-3, 'when': 5e-2, 'where': 5e-2}
+                    # preds = {'what':None, 'who':None, 'when':None, 'where':None}
+                    preds = {'what': "XXX", 'who': GN, 'when': "XXX", 'where': "XXX"}
 
-                    question = question.replace("_GN_", GN)
-                    qu = question.split()[0].lower()
-                    if qu != "what":
-                        question = question.replace("_action_", preds['what'])
+                    for idx, question in enumerate(self.questions):
 
-                    result = self.qa_pipeline(question=question, context=clean_article_regex)
-                    answer = result['answer']
-                    score = result['score']
+                        question = question.replace("_GN_", GN)
+                        qu = question.split()[0].lower()
+                        if qu != "what":
+                            question = question.replace("_action_", preds['what'])
 
-                    if score > scores[qu]:
-                        preds[qu] = answer
-                        scores[qu] = score
-                    print(question, ' : ', answer, ' score : ', score)
+                        result = self.qa_pipeline(question=question, context=paragraph)
+                        answer = result['answer']
+                        score = result['score']
 
-                # display([ key + ": " + preds[key] + " (" + str(scores[key]) + ")"  for key in preds.keys()])
-                print('\n')
+                        if score > scores[qu]:
+                            preds[qu] = answer
+                            scores[qu] = score
+                        print(question, ' : ', answer, ' score : ', score)
+
+                    # display([ key + ": " + preds[key] + " (" + str(scores[key]) + ")"  for key in preds.keys()])
+                    print('\n')

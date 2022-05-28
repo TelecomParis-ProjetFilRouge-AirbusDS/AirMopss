@@ -100,3 +100,34 @@ class DataProcessing():
             # displacy.serve(doc, host="localhost", port=5001, style='dep')  # visualisation de la NER
 
 
+
+    def prepocess(self):
+        """
+
+        """
+        # TODO un objet DataLoader comporte
+        # * data
+        # split en
+        # * sequences{id_seq et sequence} (article complet, paragraphes ou sentences)
+        #
+        pass
+
+    def score_func(self, gt, pred):
+        """
+        :param gt: sets
+        :param pred: sets
+        """
+        # Calcul des faux positifs, vrais positifs, faux négatifs
+        TP = len(gt.intersection(pred))
+        FN = len(gt - pred)
+        FP = len(pred - gt)
+
+        # Calcul du score F1
+        if (TP+FP)*(TP+FN)*TP != 0:
+            precision = TP/(TP+FP)
+            recall = TP/(TP+FN)
+            F1 = 2 * precision * recall / (precision + recall)
+        else :
+            F1 = 1
+
+        return F1
