@@ -51,7 +51,6 @@ def list_to_text(l):
 def clean_text(txt):
     return list_to_text(remove_stop_sentences(txt))
 
-
 def tokens_to_list_unique(tokens):
     l = [" ".join([str(elt) for elt in token]).strip() for token in tokens]
     l = list(dict.fromkeys(l))

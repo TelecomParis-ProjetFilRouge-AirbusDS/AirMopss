@@ -32,7 +32,7 @@ def explain(term):
 
 def get_infos(doc):
     """
-    
+
     :param doc:
     :return:
     """
