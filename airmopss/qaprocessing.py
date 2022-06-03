@@ -75,6 +75,7 @@ class QaProcessing():
         :return:
         """
         np_list_subj = []
+        gn_subj_idx = []
         for word in doc:
             if word.dep_ == 'nsubj' and word.pos_ not in ['PRON']:
                 word_subtree = word.subtree
@@ -83,12 +84,16 @@ class QaProcessing():
                     flag = flag or elt.ent_type_ in ['GPE', 'PERSON', 'ORG', 'NORP']
                 if flag:
                     np_list_subj.append([elt for elt in word.subtree])
+                    word_index = [elt.idx for elt in word.subtree]
+                    word_len = [len(elt) for elt in word.subtree]
+                    idx = [word_index[0], word_index[-1] + word_len[-1]]
+                    gn_subj_idx.append(idx)
 
         # reconcatene en liste de string
         gn_subj = [" ".join([str(elt) for elt in GN]).strip() for GN in np_list_subj]
         gn_subj = list(dict.fromkeys(gn_subj))
 
-        return gn_subj
+        return gn_subj, gn_subj_idx
 
     def preprocess(self, idx):
         """
@@ -133,7 +138,7 @@ class QaProcessing():
 
                 doc = self.pipeline(paragraph)
 
-                gn_subj = self.get_gn_subjs(doc)
+                gn_subj, gn_subj_idx = self.get_gn_subjs(doc)
 
                 print(doc, '\n')
 
