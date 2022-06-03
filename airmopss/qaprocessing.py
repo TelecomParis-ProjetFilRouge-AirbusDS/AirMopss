@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
 
+"""
 from .preprocessing import *
 from .spacy_utils import *
 from .utils import *
@@ -12,7 +14,17 @@ from transformers import pipeline
 
 
 class QaProcessing():
+    """
+    Class QaProcessing
+    """
+
     def __init__(self, config, data_loader):
+        """
+        Constructor
+
+        :param config:
+        :param data_loader:
+        """
         self.data = data_loader.data
 
         # ugly hack
@@ -24,7 +36,11 @@ class QaProcessing():
         self.questions = self.set_questions()
 
     def set_questions(self):
-        # Pipeline de questions
+        """
+        Suite de patterns de questions
+
+        :return:
+        """
         questions = [
             "What happened to _GN_?",
             "What happens to _GN_?",
@@ -43,13 +59,21 @@ class QaProcessing():
         return questions
 
     def ask_question(self):
+        """
+
+        """
         while True:
             q = input("Enter a question: ")
             if q == "#": break
             print(q)
 
     def get_gn_subjs(self, doc):
-        # Extraire l'ensemble des groupes nominaux et qui soient dans ['GPE', 'PERSON', 'ORG', 'NORP']
+        """
+        Extraire l'ensemble des groupes nominaux sujets (non-pronominaux) qui sont des entités ['GPE', 'PERSON', 'ORG', 'NORP'] et les index de début et de fin
+
+        :param doc:
+        :return:
+        """
         np_list_subj = []
         for word in doc:
             if word.dep_ == 'nsubj' and word.pos_ not in ['PRON']:
@@ -67,6 +91,11 @@ class QaProcessing():
         return gn_subj
 
     def preprocess(self, idx):
+        """
+
+        :param idx:
+        :return:
+        """
         # To merge with preprocessing.py
         article = self.df.iloc[idx].content_y
 
@@ -86,6 +115,10 @@ class QaProcessing():
         return paragraphs, article
 
     def process(self):
+        """
+
+        :return:
+        """
         #articles = self.data[2]
 
         for idx in [101]:

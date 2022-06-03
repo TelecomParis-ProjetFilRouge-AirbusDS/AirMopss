@@ -16,12 +16,26 @@ def get_labels(pipeline: object = "ner", model: object = "en_core_web_sm") -> ob
         print(label, " -- ", spacy.explain(label))
 
 def get_any_tag_label():
+    """
+
+    :return:
+    """
     print(spacy.glossary.GLOSSARY)
 
 def explain(term):
+    """
+
+    :param term:
+    :return:
+    """
     spacy.explain(term)
 
 def get_infos(doc):
+    """
+    
+    :param doc:
+    :return:
+    """
     deps = [word.dep_ for word in doc]  # extrait les dépendances entre les entités
     ents = list(doc.ents)  # doc.ents extrait les entités nommées
     print(ents[0].label)  # renvoie un nombre correspondant au label

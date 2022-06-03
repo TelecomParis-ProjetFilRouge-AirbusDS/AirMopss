@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
 
+"""
 import pandas as pd
 import spacy
 import json
@@ -8,7 +10,18 @@ import json
 #pipelines = ["tok2vec", "tagger", "parser", "ner"]
 
 class DataLoader():
+    """
+    Load data from a csv file
+
+    Fields available in csv file :
+    id, author, title, description, url, urlToImage, publishedAt, content_x, source.id, source.name, content_y
+
+    """
     def __init__(self, config):
+        """
+
+        :param config:
+        """
 
         self.data = self.load_data(config.csv_file, config.labelled_only)
         self.labels = self.load_labels(config.labels_file)
@@ -43,10 +56,17 @@ class DataLoader():
         """
         Opens JSON file of labels
 
+        :param json_file:
+        :return:
         """
         with open(json_file) as f:
             data = json.load(f)
         return data
 
     def get_pipeline(self, pipeline):
+        """
+
+        :param pipeline:
+        :return:
+        """
         return spacy.load(pipeline)

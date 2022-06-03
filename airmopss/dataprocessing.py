@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This module contains the processing class of our project: MyApp.
+This module contains the data processing class of our project.
 """
 
 from .qaprocessing import QaProcessing
@@ -114,10 +114,11 @@ class DataProcessing():
 
     def score_func(self, gt, pred):
         """
+        Calcul des faux positifs, vrais positifs, faux négatifs
+
         :param gt: sets
         :param pred: sets
         """
-        # Calcul des faux positifs, vrais positifs, faux négatifs
         TP = len(gt.intersection(pred))
         FN = len(gt - pred)
         FP = len(pred - gt)
