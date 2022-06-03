@@ -4,14 +4,6 @@ airmopss package
 Submodules
 ----------
 
-airmopss.builder module
------------------------
-
-.. automodule:: airmopss.builder
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 airmopss.dataloader module
 --------------------------
 
@@ -24,14 +16,6 @@ airmopss.dataprocessing module
 ------------------------------
 
 .. automodule:: airmopss.dataprocessing
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-airmopss.misc module
---------------------
-
-.. automodule:: airmopss.misc
    :members:
    :undoc-members:
    :show-inheritance:
