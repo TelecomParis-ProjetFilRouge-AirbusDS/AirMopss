@@ -3,6 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. warning:: This documentation is under construction. Don't rely on it.
+
 Welcome to AirMopss's documentation!
 ====================================
 
@@ -10,8 +12,8 @@ Welcome to AirMopss's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   usage/installation
    usage/quickstart
+   airmopss/modules
 
 Indices and tables
 ==================
