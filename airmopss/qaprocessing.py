@@ -6,19 +6,19 @@
 from .preprocessing import *
 from .spacy_utils import *
 from .utils import *
+from .dataloader import DataLoader
 
 import re
 
 import transformers
 from transformers import pipeline
 
-
 class QaProcessing():
     """
     Class QaProcessing
     """
 
-    def __init__(self, config, data_loader):
+    def __init__(self, config, data_loader: DataLoader):
         """
         Constructor
 
@@ -27,6 +27,7 @@ class QaProcessing():
         """
         self.data = data_loader.data
 
+        self.data_loader = data_loader
         # ugly hack
         self.df = data_loader.data_df
 

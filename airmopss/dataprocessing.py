@@ -5,6 +5,7 @@ This module contains the data processing class of our project.
 """
 
 from .qaprocessing import QaProcessing
+from .dataloader import DataLoader
 from .preprocessing import *
 from .spacy_utils import *
 from .utils import *
@@ -13,12 +14,13 @@ class DataProcessing():
     """
     This class **is** the application. It contains everything related to the interface, and the core logic of the project.
     """
-    def __init__(self, config, data_loader):
+    def __init__(self, config, data_loader: DataLoader):
         """
         Class initialization
         """
         self.config = config
         self.data = data_loader.data
+        self.data_loader = data_loader
         self.pipeline = data_loader.pipeline
 
         if "qa" == config.task:
