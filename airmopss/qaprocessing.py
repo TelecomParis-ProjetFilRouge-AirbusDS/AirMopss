@@ -25,11 +25,8 @@ class QaProcessing():
         :param config:
         :param data_loader:
         """
-        self.data = data_loader.data
 
         self.data_loader = data_loader
-        # ugly hack
-        self.df = data_loader.data_df
 
         self.pipeline = data_loader.pipeline
         self.qa_pipeline = pipeline("question-answering")  # , model="distilbert-base-cased-distilled-squad", tokenizer="bert-base-cased")
@@ -103,11 +100,21 @@ class QaProcessing():
         :return:
         """
         # To merge with preprocessing.py
-        article = self.df.iloc[idx].content_y
+        #article = self.df.iloc[idx].content_y
+        article = self.data_loader.get_data_content_full(idx) # retrun tilte, descr, contents...
+        _content_x =  self.data_loader.get_data_content_x(idx)
+        _content_y =  self.data_loader.get_data_content_y(idx)
+        _, article_splitted = self.data_loader.get_data_content_full_splitted(idx)[0]
 
+        #print('!'*30)
+        #print(article_splitted)
+
+        # UGLY below, splittnig partially done on data_loader
         article = clean_text(article)
 
-        start = self.df.iloc[idx].content_y.find(self.df.iloc[idx].content_x[:50])
+        # start = self.df.iloc[idx].content_y.find(self.df.iloc[idx].content_x[:50])
+        start = _content_y.find(_content_x[:50])
+
         if start != -1:
             article = article[start:]
 

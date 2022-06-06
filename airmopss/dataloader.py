@@ -27,6 +27,7 @@ class DataLoader():
         self.data = self.load_data(config.csv_file)
 
         self.pipeline = self.get_pipeline(config.pipeline)
+        self.sequences = []
 
     def load_data(self, csv_file, labelled_only=False):
         """
@@ -84,10 +85,6 @@ class DataLoader():
         # for idx in art_ids:
         #     d.pop(idx, None)
 
-        for idx in art_ids:
-            articles.append(df.iloc[idx]["content_y"])
-            descriptions.append(df.iloc[idx]["description"])
-            titles.append(df.iloc[idx]["title"])
 
     def _split_into_paragraph(self, content):
         return content.splitlines(True)
@@ -96,7 +93,55 @@ class DataLoader():
         # TODO
         return content.split(".!?")
 
-        return [titles, descriptions, articles]
+    # getters
+    def get_data_author(self, idx):
+        return self.data[idx]["author"]
+
+    def get_data_title(self, idx):
+        return self.data[idx]["title"]
+
+    def get_data_description(self, idx):
+        return self.data[idx]["description"]
+
+    def get_data_url(self, idx):
+        return self.data[idx]["url"]
+
+    def get_data_urlToImage(self, idx):
+        return self.data[idx]["urlToImage"]
+
+    def get_data_publishedAt(self, idx):
+        return self.data[idx]["publishedAt"]
+
+    def get_data_content_x(self, idx):
+        return self.data[idx]["content_x"]
+
+    def get_data_source_id(self, idx):
+        return self.data[idx]["source.id"]
+
+    def get_data_source_name(self, idx):
+        return self.data[idx]["source.name"]
+
+    def get_data_content_y(self, idx):
+        return self.data[idx]["content_y"]
+
+    def get_data_content_full(self, idx):
+        """
+        returns field containing concat of title, description, content_x, content_y
+        """
+        return self.data[idx]["content_full"]
+
+    def get_data_content_full_splitted(self, idx):
+        """
+        returns field containing concat of title, description, content_x, content_y splitted in article, paragraph or sentence
+        """
+        return self.data[idx]["content_full_splitted"]
+
+    def get_seq(self, id_start, id_end, id_article=0, field='content_y' ):
+        t = self.data[id_article][field]
+        if id_start < id_end < len(t):
+            return t[id_start:id_end]
+        else:
+            return t
 
     def load_labels(self, json_file):
         """
@@ -115,7 +160,7 @@ class DataLoader():
         :param pipeline:
         :return:
         """
-        return spacy.load(pipeline)if __name__ == '__main__':
+        return spacy.load(pipeline)
 
 if __name__ == '__main__':
     import argparse
@@ -127,3 +172,4 @@ if __name__ == '__main__':
 
     dl = DataLoader(config)
     dl.load_data(config.csv_file)
+    #dl._split_into_paragraph("A paragraph\n\nsecond paragraph\n\nlast paragraph")
