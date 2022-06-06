@@ -1,0 +1,961 @@
+[
+
+{
+    "reference": {
+        "id": 101,
+        "url":"https://gizmodo.com/israel-rejected-ukrainian-plea-for-pegasus-hacking-soft-1848694356",
+        "date": "2022-03-23T21:37:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Israeli defense officials", 
+            "start_char":0, 
+            "end_char":25, 
+            "entity-type":"NORP" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": null,
+        "event_type": {
+            "text":"blocked an effort by Ukraine to obtain NSO Group’s Pegasus surveillance software",
+            "start_char":26,
+            "end_char":106
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":102,
+        "url": "https://www.reuters.com/world/italys-draghi-calls-china-not-support-russia-2022-03-23/",
+        "date":"2022-03-23T08:42:00Z" 
+    },
+    "events": {
+        "actor1": {
+            "text":"Italian Prime Minister Mario Draghi", 
+            "start_char":0, 
+            "end_char":35, 
+            "entity-type":"PERSON"
+        },
+        "actor2": null,
+        "location": {
+            "text":"ROME",
+            "start_char":245,
+            "end_char":249
+        },
+        "date": {
+            "text":"March 23",
+            "start_char":251,
+            "end_char":259
+        },
+        "event_type": {
+            "text":"urged China on Wednesday not to support Russia after its invasion of Ukraine",
+            "start_char":308,
+            "end_char":384
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":105,
+        "url":"https://www.reuters.com/world/europe/nato-head-tells-russia-it-cannot-win-nuclear-war-2022-03-23/",
+        "date":"2022-03-23T13:52:00Z" 
+    },
+    "events": {
+        "actor1": {
+            "text":"NATO Secretary General Jens Stoltenberg", 
+            "start_char":0, 
+            "end_char":39, 
+            "entity-type":"PERSON" 
+        },
+        "actor2": null,
+	"location": {
+            "text":"Brussels, Belgium",
+            "start_char":139,
+            "end_char":156
+        },
+        "date": {
+            "text":"March 23, 2022",
+            "start_char":157,
+            "end_char":171
+        },
+        "event_type": {
+            "text":"warned on Wednesday against Russia's war in Ukraine sliding into a nuclear confrontation between Moscow and the West",
+            "start_char":234,
+            "end_char":350
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":107,
+        "url":"https://amp.theguardian.com/uk-news/2022/mar/23/russian-couple-who-protested-against-war-in-ukraine-claim-asylum-in-uk",
+        "date":"2022-03-23T06:00:22Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"A Russian couple", 
+            "start_char":0, 
+            "end_char":16, 
+            "entity-type":"PERSON"
+        },
+        "actor2": null,
+        "location": null,
+        "date": null,
+        "event_type": {
+            "text":"claimed asylum in the UK",
+            "start_char":135,
+            "end_char":159
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":108,
+        "url":"https://amp.theguardian.com/world/2022/mar/23/military-supplies-depleted-on-both-sides-but-russia-retains-advantage",
+        "date":"2022-03-23T22:30:41Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"both sides in the conflict", 
+            "start_char":139, 
+            "end_char":165, 
+            "entity-type":"GPE" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"a month since Russia launched its invasion of Ukraine",
+            "start_char":12,
+            "end_char":65
+        },
+        "event_type": {
+            "text":"depleted their stocks of ammunition and other military supplies",
+            "start_char":184,
+            "end_char":247
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":120,
+        "url":"https://amp.theguardian.com/world/2022/mar/23/nato-countries-to-give-ukraine-kit-to-protect-against-chemical-and-nuclear-attacks",
+        "date":"2022-03-23T16:20:30Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Nato countries", 
+            "start_char":0, 
+            "end_char":14, 
+            "entity-type":"GPE" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"Thursday",
+            "start_char":40,
+            "end_char":48
+        },
+        "event_type": {
+            "text":"provide special kit to protect Ukraine against any chemical, biological or nuclear attacks launched by Russia",
+            "start_char":104,
+            "end_char":213
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":125,
+        "url":"https://www.reuters.com/business/us-uk-canada-export-credit-agencies-halt-support-russia-belarus-over-ukraine-war-2022-03-23/",
+        "date":"2022-03-23T15:04:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"The export credit agencies of the United States, Britain and Canada", 
+            "start_char":178, 
+            "end_char":245, 
+            "entity-type":"" 
+        },
+        "actor2": {
+            "text":"Russia", 
+            "start_char":320, 
+            "end_char":326, 
+            "entity-type":"" 
+        },
+        "location": {
+            "text":"WASHINGTON",
+            "start_char":145,
+            "end_char":155
+        },
+        "date": {
+            "text":"March 23",
+            "start_char":155,
+            "end_char":165
+        },
+        "event_type": {
+            "text":"withdrawing new export credit support for Russia and Belarus",
+            "start_char":278,
+            "end_char":338
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":127,
+        "url":"https://www.reuters.com/world/europe/europe-cannot-end-russia-energy-dependence-overnight-scholz-2022-03-23/",
+        "date":"2022-03-23T10:43:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"German Chancellor Olaf Scholz", 
+            "start_char":0, 
+            "end_char":29, 
+            "entity-type":["PERSON", "GPE"]
+        },
+        "actor2": null,
+        "location": {
+            "text":"BERLIN",
+            "start_char":350,
+            "end_char":356
+        },
+        "date": {
+            "text":"on Wednesday",
+            "start_char":603,
+            "end_char":615
+        },
+        "event_type": {
+            "text":"Europe will end its energy dependence on Russia",
+            "start_char":379,
+            "end_char":426
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":129,
+        "url":"https://www.reuters.com/technology/google-pause-ads-that-exploit-dismiss-russia-ukraine-war-2022-03-23/",
+        "date":"2022-03-23T17:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Alphabet-owned (GOOGL.O) Google", 
+            "start_char":177, 
+            "end_char":201, 
+            "entity-type":"ORG" 
+        },
+        "actor2":null,
+        "location":null,
+        "date": {
+            "text":"Wednesday",
+            "start_char":391,
+            "end_char":400
+        },
+        "event_type": {
+            "text":"Google will not help websites, apps and YouTube channels sell ads alongside content that it deems exploits, dismisses or condones the ongoing Russia-Ukraine conflict",
+            "start_char":202,
+            "end_char":367
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":134,
+        "url":"https://www.reuters.com/world/europe/consequences-any-russia-nato-clash-would-be-hard-repair-kremlin-2022-03-23/",
+        "date":"2022-03-23T10:18:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Kremlin spokesperson Dmitry Peskov", 
+            "start_char":217, 
+            "end_char":251, 
+            "entity-type":"PERSON" 
+        },
+        "actor2":null,
+        "location": {
+            "text":"reporters",
+            "start_char":446,
+            "end_char":455
+        },
+        "date": null,
+        "event_type": {
+            "text":"said any possible contact between the Russian military and NATO forces could have grave consequences",
+            "start_char":46,
+            "end_char":146
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":137,
+        "url":"https://www.reuters.com/world/nato-warns-china-not-help-russia-ukraine-war-2022-03-23/",
+        "date":"2022-03-23T13:46:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"NATO", 
+            "start_char":0, 
+            "end_char":4, 
+            "entity-type":"GPE" 
+        },
+        "actor1": {
+            "text":"Chine", 
+            "start_char":242, 
+            "end_char":247, 
+            "entity-type":"GPE" 
+        },
+	"location": {
+            "text":"Brussels, Belgium",
+            "start_char":139,
+            "end_char":156
+        },
+        "date": {
+            "text":"March 23, 2022",
+            "start_char":157,
+            "end_char":171
+        },
+        "event_type": {
+            "text":"worries China could support Russia's invasion of Ukrain",
+            "start_char":234,
+            "end_char":289
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":142,
+        "url":"https://www.reuters.com/business/retail-consumer/danone-continue-russian-production-essential-products-2022-03-23/",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"French food group Danone (DANO.PA)", 
+            "start_char":217, 
+            "end_char":251, 
+            "entity-type":"ORG" 
+        },
+        "actor2":null,
+	"location": {
+            "text":"PARIS",
+            "start_char":189,
+            "end_char":194
+        },
+        "date": {
+            "text":"March 23",
+            "start_char":196,
+            "end_char":204
+        },
+        "event_type": {
+            "text":"continue local production in Russia of essential dairy and infant nutrition products",
+            "start_char":279,
+            "end_char":363
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":145,
+        "url":"https://amp.theguardian.com/football/2022/mar/23/russia-declares-interest-in-hosting-euro-2028-or-2032-despite-football-ban-uefa-fifa",
+        "date":"2022-03-23T14:35:40Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Russia", 
+            "start_char":189, 
+            "end_char":195, 
+            "entity-type":"GPE" 
+        },
+        "actor2":null,
+        "location": null,
+        "date": null,
+        "event_type": {
+            "text":"declared an interest in hosting the event in 2032",
+            "start_char":1004,
+            "end_char":1054
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":151,
+        "url":"https://www.reuters.com/business/car-dealer-pendragon-enjoys-record-profit-flags-higher-costs-2022-03-23/",
+        "date":"2022-03-23T09:28:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Pendragon (PDG.L)", 
+            "start_char":188, 
+            "end_char":205, 
+            "entity-type":"ORG" 
+        },
+        "actor2": null,
+        "location":null,
+        "date": {
+            "text":"Wednesday",
+            "start_char":241,
+            "end_char":250
+        },
+        "event_type": {
+            "text":"reported record annual earnings",
+            "start_char":206,
+            "end_char":237
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":156,
+        "url":"https://www.reuters.com/business/aerospace-defense/vietnam-airlines-suspend-regular-flights-russia-march-25-2022-03-23/",
+        "date":"2022-03-23T04:20:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Vietnam Airlines", 
+            "start_char":50, 
+            "end_char":66, 
+            "entity-type":"ORG" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"on Wednesday",
+            "start_char":223,
+            "end_char":235
+        },
+        "event_type": {
+            "text":"will temporarily suspend regular flights from Hanoi to Moscow starting from March 25 until further notice",
+            "start_char":67,
+            "end_char":172
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":160,
+        "url":"https://www.reuters.com/world/us-sets-some-red-lines-china-over-support-russia-2022-03-23/",
+        "date":"2022-03-23T18:49:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"White House national security adviser Jake Sullivan", 
+            "start_char":489, 
+            "end_char":540, 
+            "entity-type":"PERSON" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"on Wednesday",
+            "start_char":310,
+            "end_char":322
+        },
+        "event_type": {
+            "text":"told reporters that G7 countries would soon announce a unified response to make sure Russia cannot evade Western sanctions imposed over its invasion of Ukraine with the help of China or any other country.",
+            "start_char":541,
+            "end_char":745
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":172,
+        "url":"https://www.reuters.com/world/india/indian-oil-buys-3-mln-barrels-urals-may-loading-trade-sources-2022-03-23/",
+        "date":"2022-03-23T16:16:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Indian Oil Corp (IOC.NS)", 
+            "start_char":152, 
+            "end_char":176, 
+            "entity-type":"ORG" 
+        },
+        "actor2":null,
+        "location": null,
+        "date": {
+            "text":"on Wednesday",
+            "start_char":205,
+            "end_char":217
+        },
+        "event_type": {
+            "text":"bought 3 million barrels of Russian Urals and 2 million barrels of West African oil through a tender for May loading",
+            "start_char":218,
+            "end_char":334
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":180,
+        "url":"https://www.reuters.com/world/russias-ambassador-indonesia-says-putin-plans-attend-g20-summit-2022-03-23/",
+        "date":"2022-03-23T05:18:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Russia's ambassador in Jakarta", 
+            "start_char":342, 
+            "end_char":372, 
+            "entity-type":"PERSON" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"on Wednesday",
+            "start_char":378,
+            "end_char":390
+        },
+        "event_type": {
+            "text":"Russian President Vladimir Putin intends to attend a G20 summit being hosted by Indonesia later this year",
+            "start_char":235,
+            "end_char":340
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":188,
+        "url":"https://www.reuters.com/world/us/us-lawmakers-push-global-food-aid-funding-un-warns-famine-2022-03-23/",
+        "date":"2022-03-23T15:00:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"members of the U.S. Senate's bipartisan hunger caucus", 
+            "start_char":428, 
+            "end_char":481, 
+            "entity-type":["PERSON","GPE"] 
+        },
+        "actor2": null,
+        "location": null,
+        "date":null,
+        "event_type": {
+            "text":"The United States must increase food aid to prevent millions of people starving as Russia's invasion of Ukraine threatens global grain supplies",
+            "start_char":283,
+            "end_char":426
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":196,
+        "url":"https://amp.theguardian.com/world/2022/mar/23/uk-doubles-number-of-missiles-sent-to-ukraine-ahead-of-nato-summit",
+        "date":"2022-03-23T22:30:41Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Boris Johnson", 
+            "start_char":204, 
+            "end_char":217, 
+            "entity-type":"GPE" 
+        },
+        "actor2":null,
+        "location": {
+            "text":"at the Nato summit",
+            "start_char":242,
+            "end_char":260
+        },
+        "date": {
+            "text":"on Thursday",
+            "start_char":261,
+            "end_char":272
+        },
+        "event_type": {
+            "text":"The UK will double the number of missiles it sends to Ukraine and urge western allies to step up provisions of lethal aid to the country",
+            "start_char":0,
+            "end_char":136
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":301,
+        "url":"https://www.theverge.com/2022/3/21/22988994/russia-science-publication-database-conferences",
+        "date": "2022-03-21T16:20:39Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Russian scientists", 
+            "start_char":"0", 
+            "end_char":"17", 
+            "entity-type":"NORP" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"this year",
+            "start_char":69,
+            "end_char":77
+        },
+        "event_type": {
+            "text":"will not participate in international conferences",
+            "start_char":19,
+            "end_char":67
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":304,
+        "url": "https://www.reuters.com/world/europe/kremlin-says-no-significant-progress-peace-talks-with-ukraine-2022-03-21/",
+        "date":"2022-03-21T10:01:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"shopping center", 
+            "start_char":24, 
+            "end_char":38, 
+            "entity-type":null 
+        },
+        "actor2": null,
+        "location": {
+            "text":"the Podilskyi district of Kyiv",
+            "start_char":89,
+            "end_char":118
+        },
+        "date": {
+            "text":"March 21, 2022",
+            "start_char":181,
+            "end_char":194
+        },
+        "event_type": {
+            "text":"was hit in a military strike",
+            "start_char":57,
+            "end_char":84
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":306,
+        "url":"https://www.businessinsider.com/ukraine-russia-have-both-weaponized-facial-recognition-2022-3",
+        "date":"2022-03-21T20:38:59Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Russia", 
+            "start_char":0, 
+            "end_char":5, 
+            "entity-type":"GPE" 
+        },
+        "actor2": {
+            "text":"anti-war protesters",
+            "start_char":38,
+            "end_char":56,
+            "entity-type":null
+        },
+        "location":null,
+        "date":null,
+        "event_type": {
+            "text":"uses surveillance to hunt down",
+            "start_char":7,
+            "end_char":36
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":308,
+        "url":"https://www.reuters.com/world/europe/ukraines-president-says-he-will-not-accept-russian-ultimatums-end-war-2022-03-21/",
+        "date":"2022-03-21T16:44:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Ukraine's President Volodymyr Zelenskiy", 
+            "start_char":0, 
+            "end_char":38, 
+            "entity-type":["GPE","PERSON"] 
+        },
+        "actor2": {
+            "text":"people who were injured while fleeing from Kyiv's outskirts",
+            "start_char":47,
+            "end_char":105,
+            "entity-type":"PERSON"
+        },
+        "location": {
+            "text":"a hospital in Kyiv, Ukraine",
+            "start_char":151,
+            "end_char":177
+        },
+        "date": {
+            "text":"March 17, 2022",
+            "start_char":179,
+            "end_char":192
+        },
+        "event_type": {
+            "text":"visits",
+            "start_char":40,
+            "end_char":45
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":309,
+        "url":"https://www.reuters.com/business/gold-little-changed-focus-remains-ukraine-crisis-2022-03-21/",
+        "date":"2022-03-21T01:37:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Gold prices", 
+            "start_char":134, 
+            "end_char":144, 
+            "entity-type":null 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"on Monday",
+            "start_char":151,
+            "end_char":159
+        },
+        "event_type": {
+            "text":"rose 0.5%",
+            "start_char":295,
+            "end_char":303
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":312,
+        "url":"https://www.ctvnews.ca/world/live-updates-zelensky-hails-protesters-confronting-troops-1.5827358",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Ukrainian President Volodymyr Zelenskyy", 
+            "start_char":17, 
+            "end_char":55, 
+            "entity-type":"" 
+        },
+        "actor2": null,
+        "location": null,
+        "date": {
+            "text":"late Monday",
+            "start_char":62,
+            "end_char":72
+        },
+        "event_type": {
+            "text":"was prepared to discuss a commitment from Ukraine not to seek NATO membership in exchange for a cease-fire, the withdrawal of Russian troops and a guarantee of Ukraine's security",
+            "start_char":77,
+            "end_char":254
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":312,
+        "url":"https://www.ctvnews.ca/world/live-updates-zelensky-hails-protesters-confronting-troops-1.5827358",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Russian forces", 
+            "start_char":1394, 
+            "end_char":1407, 
+            "entity-type":"" 
+        },
+        "actor2":null,
+        "location": {
+            "text":"Zaporizhzhia region",
+            "start_char":1657,
+            "end_char":1675
+        },
+        "date": {
+            "text":"on Monday",
+            "start_char":1447,
+            "end_char":1455
+        },
+        "event_type": {
+            "text":"shelled along a humanitarian corridor",
+            "start_char":1409,
+            "end_char":1445
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":312,
+        "url":"https://www.ctvnews.ca/world/live-updates-zelensky-hails-protesters-confronting-troops-1.5827358",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"The White House", 
+            "start_char":4407, 
+            "end_char":4421, 
+            "entity-type":"" 
+        },
+        "actor2": {
+            "text":"the European leaders",
+            "start_char":4452,
+            "end_char":4480,
+            "entity-type":""
+        },
+        "location": null,
+        "date": {
+            "text":"on Monday",
+            "start_char":4487,
+            "end_char":4495
+        },
+        "event_type": {
+            "text":"discussed their concerns about Russia's tactics in Ukraine, including attacks on civilians, and underscored continued humanitarian and security support for Ukraine",
+            "start_char":4497,
+            "end_char":4659
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":312,
+        "url":"https://www.ctvnews.ca/world/live-updates-zelensky-hails-protesters-confronting-troops-1.5827358",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"the Russians", 
+            "start_char":4946, 
+            "end_char":4957, 
+            "entity-type":"" 
+        },
+        "actor2":null,
+        "location": {
+            "text":" over Ukraine",
+            "start_char":5014,
+            "end_char":5025
+        },
+        "date": {
+            "text":"over the past two days",
+            "start_char":5027,
+            "end_char":5048
+        },
+        "event_type": {
+            "text":"have increased the number of military aircraft sorties",
+            "start_char":4959,
+            "end_char":5012
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":312,
+        "url":"https://www.ctvnews.ca/world/live-updates-zelensky-hails-protesters-confronting-troops-1.5827358",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"the Russians", 
+            "start_char":5732, 
+            "end_char":5743, 
+            "entity-type":"" 
+        },
+        "actor2":null,
+        "location": {
+            "text":" in the northern Black Sea",
+            "start_char":5780,
+            "end_char":5804
+        },
+        "date": null,
+        "event_type": {
+            "text":"have also increased naval activity",
+            "start_char":5745,
+            "end_char":5778
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":312,
+        "url":"https://www.ctvnews.ca/world/live-updates-zelensky-hails-protesters-confronting-troops-1.5827358",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"Leaders from Poland and The Netherlands", 
+            "start_char":7046, 
+            "end_char":7084, 
+            "entity-type":"" 
+        },
+        "actor2": null,
+        "location": {
+            "text":"WARSAW, Poland",
+            "start_char":7028,
+            "end_char":7041
+        },
+        "date": {
+            "text":"Monday",
+            "start_char":7337,
+            "end_char":7342
+        },
+        "event_type": {
+            "text":"discussed further sanctions on Russia for its war against Ukraine, including banning imports of Russia's oil and gas and closing European ports to Russian ships",
+            "start_char":7086,
+            "end_char":7245
+        }
+    }
+}
+,
+{
+    "reference": {
+        "id":312,
+        "url":"https://www.ctvnews.ca/world/live-updates-zelensky-hails-protesters-confronting-troops-1.5827358",
+        "date":"2022-03-21T06:50:00Z"
+    },
+    "events": {
+        "actor1": {
+            "text":"A Moscow court", 
+            "start_char":8332, 
+            "end_char":8345, 
+            "entity-type":"" 
+        },
+        "actor2": {
+            "text":"Facebook and Instagram",
+            "start_char":8354,
+            "end_char":8375,
+            "entity-type":""
+        },
+        "location": {
+            "text":"MOSCOW ",
+            "start_char":8322,
+            "end_char":8327
+        },
+        "date": {
+            "text":"on Monday",
+            "start_char":8377,
+            "end_char":8385
+        },
+        "event_type": {
+            "text":"banned",
+            "start_char":8347,
+            "end_char":8352
+        }
+    }
+}
+
+]
