@@ -41,17 +41,17 @@ class QaProcessing():
         """
         questions = [
             "What happened to _GN_?",
-            "What happens to _GN_?",
+            #"What happens to _GN_?",
 
-            "What did _GN_ do?",
-            "What do _GN_ do?",
+            #"What did _GN_ do?",
+            #"What do _GN_ do?",
 
             "When did _GN_ _action_?",
-            "When do _GN_ _action_?",
+            #"When do _GN_ _action_?",
             # "When did _action_ happen?",
 
             "Where did _GN_ _action_?",
-            "Where do _GN_ _action_?",
+           # "Where do _GN_ _action_?",
             # "Where did _action_ take place?"
         ]
         return questions
@@ -140,6 +140,7 @@ class QaProcessing():
             #clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
             paragraphs, article = self.preprocess(idx)
 
+            answers_all = []
             for paragraph in paragraphs:
 
                 #print(paragraph, end='\n\n')
@@ -148,13 +149,15 @@ class QaProcessing():
 
                 gn_subj, gn_subj_idx = self.get_gn_subjs(doc)
 
-                print(doc, '\n')
+                print("*"*30, "\n", "Paragraph:" , doc, '\n')
 
                 for GN in gn_subj:
 
                     scores = {'what': 5e-3, 'who': 5e-3, 'when': 5e-2, 'where': 5e-2}
                     # preds = {'what':None, 'who':None, 'when':None, 'where':None}
                     preds = {'what': "XXX", 'who': GN, 'when': "XXX", 'where': "XXX"}
+
+                    answers_gn = []
 
                     for idx, question in enumerate(self.questions):
 
@@ -167,10 +170,21 @@ class QaProcessing():
                         answer = result['answer']
                         score = result['score']
 
+                        answers_gn.append(answer)
+
                         if score > scores[qu]:
                             preds[qu] = answer
                             scores[qu] = score
+                        else:
+                            print("Score too low")
+
                         print(question, ' : ', answer, ' score : ', score)
+
+                    answers_all.append(answers_gn)
 
                     # display([ key + ": " + preds[key] + " (" + str(scores[key]) + ")"  for key in preds.keys()])
                     print('\n')
+
+        print(answers_all)
+
+        return answers_all
