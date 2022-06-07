@@ -6,6 +6,7 @@
 import pandas as pd
 import spacy
 import json
+from utils import needleman_wunsch
 
 #pipelines = ["tok2vec", "tagger", "parser", "ner"]
 
@@ -48,7 +49,8 @@ class DataLoader():
             _d = str(d[k]["description"])
             _x = str(d[k]["content_x"])
             _y = str(d[k]["content_y"])
-            d[k]["content_full"] = _t+"\n\n"+_d+"\n\n"+_x+"\n\n"+_y
+            d[k]["content_full"] = _t+"\n\n"+_d+"\n\n"+_y
+            d[k]["content_clean"] = self.preprocess(d[k]["content_full"])
 
         # TODO handle split into paragraph, sentence
         _split = []
@@ -84,6 +86,25 @@ class DataLoader():
         # # TODO remove the complement instead
         # for idx in art_ids:
         #     d.pop(idx, None)
+
+    def get_aligned_indices(self, id_article):
+        """
+        Return a dict of key values.
+        The key is the index in the preprocessed sequence and the value is the the index of the original sequence
+
+        CAT - CT
+        {1: 1}
+
+        :param id_article:
+        :return: dict
+        """
+
+        # On récupère une liste d'indices, on veut juste les traduire.
+        _text_original = self.data[id_article]["content_full"]
+        _text_clean = self.data[id_article]["content_clean"]
+
+        _d = {elt[1]: elt[0] for elt in needleman_wunsch(_text_original, _text_clean) if elt[0] is not None and elt[1] is not None}
+        return _d
 
 
     def _split_into_paragraph(self, content):
@@ -143,6 +164,9 @@ class DataLoader():
         else:
             return t
 
+    def preprocess(self, txt):
+        return txt
+
     def load_labels(self, json_file):
         """
         Opens JSON file of labels
@@ -172,4 +196,6 @@ if __name__ == '__main__':
 
     dl = DataLoader(config)
     dl.load_data(config.csv_file)
-    #dl._split_into_paragraph("A paragraph\n\nsecond paragraph\n\nlast paragraph")
+    #print(dl._split_into_paragraph("A paragraph\n\nsecond paragraph\n\nlast paragraph"))
+    output = dl.get_aligned_indices(0)
+    print(output)
