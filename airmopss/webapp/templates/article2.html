@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+<style>
+    .article {
+  font-family: georgia;
+  /*text-align: center;*/
+  /*font-style: italic;*/
+
+  box-sizing: content-box;
+  max-width: 25em;
+  margin-top: 2em;
+  border:1px solid black;
+  word-wrap: break-word;
+  white-space: normal;
+}
+</style>
+<head>
+    <meta charset="utf-8">
+        <h1>Event Extractions</h1>
+  </head>
+{% block body %}
+    <p class="article" >
+    {% for i in range(session.len) %}
+    {% if i in session.list %}
+         <strong> {{ session.word[i] }} </strong>
+    {% else %}
+         {{ session.word[i] }}
+    {% endif %}
+    {% endfor %}
+    </p>
+{% endblock %}
+
+
+strong:hover + .hide{
+    display: block;
+    /* ouvrir une fenêtre à part, en passant la fenêtre en visible ? */
+}
+.hide {
+  display: none;
+}
