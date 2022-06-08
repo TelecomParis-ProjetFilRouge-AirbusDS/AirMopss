@@ -7,6 +7,11 @@ from urllib.request import urlopen
 from urllib.parse import urlencode
 import ssl
 
+def do_the_login():
+    pass
+
+def show_the_login_form():
+    pass
 
 def fct(text):
   list=[]
