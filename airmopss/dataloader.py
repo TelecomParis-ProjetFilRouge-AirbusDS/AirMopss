@@ -6,7 +6,11 @@
 import pandas as pd
 import spacy
 import json
-from utils import needleman_wunsch
+from .utils import needleman_wunsch
+from .preprocessing import *
+import re
+import logging
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
 #pipelines = ["tok2vec", "tagger", "parser", "ner"]
 
@@ -38,7 +42,7 @@ class DataLoader():
         :param labelled_only:
         :return:
         """
-
+        logging.debug("Loading data")
         df = pd.read_csv(csv_file)
 
         #d = df.set_index('id').T.to_dict('list')
@@ -50,7 +54,7 @@ class DataLoader():
             _x = str(d[k]["content_x"])
             _y = str(d[k]["content_y"])
             d[k]["content_full"] = _t+"\n\n"+_d+"\n\n"+_y
-            d[k]["content_clean"] = self.preprocess(d[k]["content_full"])
+            d[k]["content_clean"] = self.preprocess(_t, _d, _x, _y)
 
         # TODO handle split into paragraph, sentence
         _split = []
@@ -75,6 +79,7 @@ class DataLoader():
                 _split = [(0, d[k]["content_y"])]
                 d[k]["content_full_splitted"] = _split
 
+        logging.debug("Data loaded")
         return d
 
         # if labelled_only:
@@ -167,6 +172,31 @@ class DataLoader():
     def preprocess(self, txt):
         return txt
 
+    def preprocess(self, _title, _description, _content_x, _content_y):
+        """
+
+        :param idx:
+        :return:
+        """
+        #article = _title+"\n\n"+_description+"\n\n"+_content_y
+
+        #print('!'*30)
+        #print(article_splitted)
+
+        start = _content_y.find(_content_x[:50])
+        if start != -1:
+            _content_y = _content_y[start:]
+
+        _cleaned_content = clean_text(_content_y)
+
+        article = _title+"\n\n"+_description+"\n\n"+_cleaned_content
+
+        clean_article_regex = re.sub("\n\S+\n\n+", "\n", article)
+        clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
+        paragraphs = clean_article_regex.split('\n')
+        paragraphs = [paragraph for paragraph in paragraphs]
+        return paragraphs, article
+
     def load_labels(self, json_file):
         """
         Opens JSON file of labels
@@ -196,6 +226,6 @@ if __name__ == '__main__':
 
     dl = DataLoader(config)
     dl.load_data(config.csv_file)
-    #print(dl._split_into_paragraph("A paragraph\n\nsecond paragraph\n\nlast paragraph"))
+    output = dl._split_into_paragraph("A paragraph\n\nsecond paragraph\n\nlast paragraph")
     output = dl.get_aligned_indices(0)
     print(output)

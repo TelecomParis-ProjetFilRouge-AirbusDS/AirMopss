@@ -31,9 +31,16 @@ _stop_sentence_patterns = [
     "Reporting by Jarrett Renshaw on aboard Afir Force One and Trevor Hunnicutt in Washington; Additional reporting by Alexandra Alper; Editing by Heather Timmons, Mary Milliken and Cynthia Osterman",
     "Show caption......",
 ]
+
 _stop_sentences = [
     stop_sentences_reuters,
     stop_sentences_any
+]
+
+_unwanted_sequences = [
+    "Show caption",
+    "Getty images",
+    "@"
 ]
 
 stop_sentences = get_stop_sentences()
@@ -41,17 +48,35 @@ stop_sentences = get_stop_sentences()
 def article_to_list(txt):
     return txt.split('\n')
 
-def remove_stop_sentences(txt):
-    l_txt = article_to_list(txt)
-    return [s for s in l_txt if s not in stop_sentences]
+def remove_stop_sentences(l_txt):
+    l_txt = [s for s in l_txt if s not in stop_sentences]
+    return l_txt
+
+def remove_unwanted_sequences(l_txt):
+    for pattern in _unwanted_sequences:
+        l_txt = [s for s in l_txt if pattern not in s]
+    return l_txt
+
+def remove_short_lines(l_txt, min_num_words=10):
+    l_txt = [line for line in l_txt if len(line.split(' ')) > min_num_words]
+    return l_txt
 
 def list_to_text(l):
     return "\n".join(l)
 
 def clean_text(txt):
-    return list_to_text(remove_stop_sentences(txt))
+    l_txt = article_to_list(txt)
+    l_txt = remove_stop_sentences(l_txt)
+    l_txt = remove_unwanted_sequences(l_txt)
+    l_txt = remove_short_lines(l_txt)
+    return list_to_text(l_txt)
+
 
 def tokens_to_list_unique(tokens):
     l = [" ".join([str(elt) for elt in token]).strip() for token in tokens]
     l = list(dict.fromkeys(l))
     return  l
+
+if __name__ == '__main__':
+    s = "test\n\ntsdqfd gshsh st hsrh rshvc rshs r h f e s  t\n\nGetty images fdsqdfqsdq\n" + "Share on Twitter\n"
+    print(clean_text(s))
