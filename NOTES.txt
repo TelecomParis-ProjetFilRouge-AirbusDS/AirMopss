@@ -2,7 +2,6 @@
 Install & configure
 ===================
 
-
 - main.py
 |__ airmopps
 		|_ __init__.py
@@ -17,6 +16,24 @@ content of dataprocessing.py
 	...
 	from .qaprocessing import QaProcessing
 	...
+
+
+Launch the app
+==============
+
+In a terminal with the proper virtual env:
+
+$ cd <project_install_dir>
+$ python main.py
+
+In another terminal with the proper virtual env:
+
+On Linux
+$ cd <project_install_dir>
+$ ./launch_server.sh
+
+On Windows
+> launch_server.bat
 
 
 The "docs/"" folder 
