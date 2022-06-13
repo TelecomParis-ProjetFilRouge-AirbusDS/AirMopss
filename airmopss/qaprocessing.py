@@ -127,6 +127,19 @@ class QaProcessing():
                                                                 and "@" not in paragraph)]
         return paragraphs, article
 
+    # TODO : complete func
+    def process_raw_txt(self, input_txt):
+        """
+
+        :param input_txt:
+        :return:
+        """
+        list = []
+        for i, word in enumerate(input_txt.split()):
+            if 'b' in word:
+                list.append(i)
+        return list
+
     def process(self):
         """
 
