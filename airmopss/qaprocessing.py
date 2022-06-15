@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+This module contains the Question Answering processing class
 """
 from .preprocessing import *
 from .spacy_utils import *
@@ -9,9 +9,8 @@ from .utils import *
 from .dataloader import DataLoader
 
 import re
-
-import transformers
 from transformers import pipeline
+import logging
 
 class QaProcessing():
     """
@@ -25,6 +24,7 @@ class QaProcessing():
         :param config:
         :param data_loader:
         """
+        logging.info(f"Building {__class__.__name__} instance")
 
         self.data_loader = data_loader
 
@@ -65,6 +65,7 @@ class QaProcessing():
             if q == "#": break
             print(q)
 
+    # TODO : include Dictionnaire de mapping (dct_mapping) entre articles de base "articles[X]" et article nettoyé doc.text
     def get_gn_subjs(self, doc):
         """
         Extraire l'ensemble des groupes nominaux sujets (non-pronominaux) qui sont des entités ['GPE', 'PERSON', 'ORG', 'NORP'] et les index de début et de fin
@@ -99,15 +100,12 @@ class QaProcessing():
         :param idx:
         :return:
         """
-        # To merge with preprocessing.py
+
         #article = self.df.iloc[idx].content_y
         article = self.data_loader.get_data_content_full(idx) # retrun tilte, descr, contents...
         _content_x =  self.data_loader.get_data_content_x(idx)
         _content_y =  self.data_loader.get_data_content_y(idx)
         _, article_splitted = self.data_loader.get_data_content_full_splitted(idx)[0]
-
-        #print('!'*30)
-        #print(article_splitted)
 
         # UGLY below, splittnig partially done on data_loader
         article = clean_text(article)
@@ -118,6 +116,7 @@ class QaProcessing():
         if start != -1:
             article = article[start:]
 
+        # TODO : the following would need to be included in preprocessing.py
         clean_article_regex = re.sub("\n\S+\n\n+", "\n", article)
         clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
         paragraphs = clean_article_regex.split('\n')
@@ -127,7 +126,7 @@ class QaProcessing():
                                                                 and "@" not in paragraph)]
         return paragraphs, article
 
-    # TODO : complete func
+    # TODO : complete function
     def process_raw_txt(self, input_txt):
         """
 
@@ -146,11 +145,12 @@ class QaProcessing():
         :return:
         """
         #articles = self.data[2]
-
+        # TODO : to extend or fix depending on desired process
         for idx in [101]:
 
             #clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
             #clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
+
             paragraphs, article = self.preprocess(idx)
 
             answers_all = []

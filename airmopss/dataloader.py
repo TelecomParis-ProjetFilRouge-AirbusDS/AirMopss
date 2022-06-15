@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-
+This module contains the data loading class
 """
+
 import pandas as pd
 import spacy
 import json
@@ -10,7 +11,6 @@ from .utils import needleman_wunsch
 from .preprocessing import *
 import re
 import logging
-logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
 #pipelines = ["tok2vec", "tagger", "parser", "ner"]
 
@@ -27,10 +27,10 @@ class DataLoader():
 
         :param config:
         """
+        logging.info(f"Building {__class__.__name__} instance")
+
         self.config = config
-
         self.data = self.load_data(config.csv_file)
-
         self.pipeline = self.get_pipeline(config.pipeline)
         self.sequences = []
 
@@ -88,7 +88,7 @@ class DataLoader():
         #     # TODO check len(df) matched art ids if needed
         #     art_ids = range(len(df))
         #
-        # # TODO remove the complement instead
+        # TODO remove the complement instead
         # for idx in art_ids:
         #     d.pop(idx, None)
 
@@ -178,11 +178,6 @@ class DataLoader():
         :param idx:
         :return:
         """
-        #article = _title+"\n\n"+_description+"\n\n"+_content_y
-
-        #print('!'*30)
-        #print(article_splitted)
-
         start = _content_y.find(_content_x[:50])
         if start != -1:
             _content_y = _content_y[start:]

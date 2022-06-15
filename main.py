@@ -6,24 +6,24 @@ import argparse
 from airmopss import DataLoader
 from airmopss import DataProcessing
 from airmopss import utils
+import logging
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
 def main(config):
+    logging.info("Launching main process")
     # load data
     data_loader = DataLoader(config)
 
     # process
     data_processor = DataProcessing(config, data_loader)
-
-    #data_processor.run()
-    #data_processor.run(task="summarize")
     data_processor.run(task="qa")
 
     #create_ner_module("geopolitics_ner")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="How to launch airmopps")
-    parser.add_argument('--csv_file', type=str, default='airmopss/data/newsdata.csv', help="file of news wires (api format), default: data/newsdata.txt")
-    parser.add_argument('--labels_file', type=str, default='airmopss/data/newsdata_labels.txt', help="file of labeled articles, default: data/newsdata_labels.txt")
+    parser.add_argument('--csv_file', type=str, default='data/newsdata.csv', help="file of news wires (api format), default: data/newsdata.txt")
+    parser.add_argument('--labels_file', type=str, default='data/newsdata_labels.txt', help="file of labeled articles, default: data/newsdata_labels.txt")
     parser.add_argument('--pipeline', type=str, default='en_core_web_sm', help="chose spacy pipeline to use [en_core_web_sm], default: en_core_web_sm")
     parser.add_argument('--task', type=str, default='qa', help="task to run [qa|summarize|extract_np|version], default: qa")
     parser.add_argument('--split', type=str, default='article', help="spliting mode of content [article|paragraph], default: article")

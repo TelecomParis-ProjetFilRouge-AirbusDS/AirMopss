@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This module contains the data processing class of our project.
+This module contains the data processing class
 """
 
 from .qaprocessing import QaProcessing
@@ -9,6 +9,7 @@ from .dataloader import DataLoader
 from .preprocessing import *
 from .spacy_utils import *
 from .utils import *
+import logging
 
 class DataProcessing():
     """
@@ -18,6 +19,8 @@ class DataProcessing():
         """
         Class initialization
         """
+        logging.info(f"Building {__class__.__name__} instance")
+
         self.config = config
         self.data = data_loader.data
         self.data_loader = data_loader

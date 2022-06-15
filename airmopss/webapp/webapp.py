@@ -8,11 +8,15 @@ import argparse
 from ..dataloader import DataLoader
 from ..dataprocessing import DataProcessing
 from ..qaprocessing import QaProcessing
+import logging
 
+logging.info(f"Building Flass app...")
 app = Flask(__name__)
-app.secret_key = "TODO: mettre une valeur secrète ici"
 
-# TODO : to fix as it duplicates argarse from main.py
+app.secret_key = "SekretKi"
+
+# ugly
+# TODO : to fix as it, duplicates argarse from main.py
 config = argparse.Namespace()
 config.csv_file='airmopss/data/newsdata.csv'
 config.labels_file='airmopss/data/newsdata_labels.txt'
@@ -34,7 +38,9 @@ def index():
 def new_article():
     app.logger.warning('A new article processed (%d apples)', 42)
     session['article'] = request.form['article']
-    print("################ ", type(session['article']))
+
+    # logging.info(type(session['article']))
+
     session['word'] = session['article'].split()
     session['len'] = len(session['word'])
     # session['list'] = fct(session['article'])

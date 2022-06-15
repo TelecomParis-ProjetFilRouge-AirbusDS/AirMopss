@@ -22,7 +22,7 @@ def fct(text):
 
 if __name__ == '__main__':
     # Ce code est exécuté lorsque l'on exécute le fichier
-    print("Ça fonctionne !")
+    print("Ça fonctionne  !")
     
     # Voici des idées pour tester vos fonctions :
     # print(getJSON("Utilisateur:A3nm/INF344"))
