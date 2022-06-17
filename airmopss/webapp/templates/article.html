@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+        <h1>Event Extractions</h1>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='latest_article.js', version='12355qsdf6') }}"></script>
+  </head>
+
+    <style>
+.article {
+  font-family: georgia;
+  /*text-align: center;*/
+  /*font-style: italic;*/
+
+  box-sizing: content-box;
+  max-width: 25em;
+  margin-top: 2em;
+  border:1px solid black;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+strong {
+background-color: blue;
+
+}
+strong:hover {
+    background-color: red;
+    /* ouvrir une fenêtre à part, en passant la fenêtre en visible ? */
+}
+
+.tooltip {
+  position: absolute;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  /* color of the span text */
+  color: rgb(119, 162, 241);
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  /* color of the tooltip text */
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: fixed;
+  z-index: 1;
+    border: 5px double #b4b8bf;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+    </style>
+  <body>
+    <p class="article" >
+    {% for i in range(session.len) %}
+    {% if i in session.list %}
+
+    <strong class="tooltip" data-event={{ session.word[i] }}> {{ session.word[i]  }}
+    <span class="tooltiptext">l'événement lié au mot {{ session.word[i] }} </span>
+    </strong>
+    {% else %}
+         {{  session.word[i] }}
+    {% endif %}
+    {% endfor %}
+    </p>
+    <div id="event-container">
+
+    </div>
+
+</body>
+</html>

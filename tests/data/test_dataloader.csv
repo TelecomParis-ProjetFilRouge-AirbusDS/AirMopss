@@ -1,0 +1,6 @@
+id,author,title,description,url,urlToImage,publishedAt,content_x,source.id,source.name,content_y
+0,,le titre,"la description",https://www.bbc.co.uk,https://ichef.bbci.co.uk/img.jpg,2022-03-30T00:05:47Z,content x,bbc-news,BBC News,"A paragraph
+
+second paragraph
+
+last paragraph"

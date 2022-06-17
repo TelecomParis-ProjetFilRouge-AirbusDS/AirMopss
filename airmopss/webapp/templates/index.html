@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+        <h1>Event Extractions (integration)</h1>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='latest_article.js', version='1234') }}"></script>
+  </head>
+  <body>
+    {% block body %}
+      {# Début du bloc "body", dont vous devez modifier le contenu #}
+      <form action="/new-article" method="post">
+            <textarea type=text name="article" placeholder="Article" rows="20" cols="100">
+
+            </textarea>
+          <div class="button"><input type=submit value="Submit"></div>
+        </form>
+    {% endblock %}
+  </body>
+</html>

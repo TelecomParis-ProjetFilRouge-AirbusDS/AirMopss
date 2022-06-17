@@ -1,0 +1,74 @@
+
+Install & configure
+===================
+
+- main.py
+|__ airmopps
+		|_ __init__.py
+		|_ dataprocessing.py
+		|_ ...
+
+content of __init__.py
+	from .dataprocessing import DataProcessing
+	...
+
+content of dataprocessing.py
+	...
+	from .qaprocessing import QaProcessing
+	...
+
+
+Launch the app
+==============
+
+In a terminal with the proper virtual env:
+
+$ cd <project_install_dir>
+$ python main.py
+
+In another terminal with the proper virtual env:
+
+On Linux
+$ cd <project_install_dir>
+$ ./launch_server.sh
+
+On Windows
+> launch_server.bat
+
+
+The "docs/"" folder 
+===================
+$ mkdir docs
+$ sphinx-quickstart docs
+
+then edit source/conf.py and add path as follows:
+
+  sys.path.insert(0, os.path.abspath('../..'))
+
+then customize extensions and theme
+
+	 extensions = ['sphinx.ext.autodoc',
+	              'sphinx.ext.napoleon'
+	]
+
+	html_theme = 'sphinx_rtd_theme'
+
+
+Generate the doc 
+================
+
+$ cd docs
+
+# regenerate modules
+$ sphinx-apidoc -f -o source/airmopss ../airmopss
+
+# regenerate doc
+
+$ make clean && make html
+$ make latex
+
+
+Useful tutorials
+================
+
+https://betterprogramming.pub/auto-documenting-a-python-project-using-sphinx-8878f9ddc6e9
