@@ -105,18 +105,6 @@ class DataProcessing():
             # displacy.serve(doc, host="localhost", port=5001, style='dep')  # visualisation de la NER
 
 
-
-    def prepocess(self):
-        """
-
-        """
-        # TODO un objet DataLoader comporte
-        # * data
-        # split en
-        # * sequences{id_seq et sequence} (article complet, paragraphes ou sentences)
-        #
-        pass
-
     def score_func(self, gt, pred):
         """
         Calcul des faux positifs, vrais positifs, faux négatifs

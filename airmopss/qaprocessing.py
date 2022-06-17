@@ -28,7 +28,7 @@ class QaProcessing():
 
         self.data_loader = data_loader
 
-        self.pipeline = data_loader.pipeline
+        self.spacy_pipeline = data_loader.pipeline
         self.qa_pipeline = pipeline("question-answering")  # , model="distilbert-base-cased-distilled-squad", tokenizer="bert-base-cased")
 
         self.questions = self.set_questions()
@@ -65,10 +65,13 @@ class QaProcessing():
             if q == "#": break
             print(q)
 
+
     # TODO : include Dictionnaire de mapping (dct_mapping) entre articles de base "articles[X]" et article nettoyé doc.text
-    def get_gn_subjs(self, doc):
+    def get_gn_subjs(self, doc, increment=0):
         """
         Extraire l'ensemble des groupes nominaux sujets (non-pronominaux) qui sont des entités ['GPE', 'PERSON', 'ORG', 'NORP'] et les index de début et de fin
+
+        ICIC ON DECRIT DCE QUON RENVIE
 
         :param doc:
         :return:
@@ -133,6 +136,9 @@ class QaProcessing():
         :param input_txt:
         :return:
         """
+        # TODO change idx to sth else
+        paragraphs, article = self.preprocess_txt(input_txt)
+
         list = []
         for i, word in enumerate(input_txt.split()):
             if 'b' in word:
@@ -158,9 +164,9 @@ class QaProcessing():
 
                 #print(paragraph, end='\n\n')
 
-                doc = self.pipeline(paragraph)
+                doc = self.spacy_pipeline(paragraph)
 
-                gn_subj, gn_subj_idx = self.get_gn_subjs(doc)
+                gn_subj, gn_subj_idx = self.get_gn_subjs(doc, increment=0)
 
                 print("*"*30, "\n", "Paragraph:" , doc, '\n')
 

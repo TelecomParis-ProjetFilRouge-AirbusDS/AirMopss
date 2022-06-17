@@ -31,7 +31,8 @@ class DataLoader():
 
         self.config = config
         self.data = self.load_data(config.csv_file)
-        self.pipeline = self.get_pipeline(config.pipeline)
+        # en_core_web_sm ou autre
+        self.pipeline = self.get_pipeline(config.spacy_pipeline)
         self.sequences = []
 
     def load_data(self, csv_file, labelled_only=False):
