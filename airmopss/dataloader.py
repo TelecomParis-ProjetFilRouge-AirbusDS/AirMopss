@@ -93,10 +93,24 @@ class DataLoader():
         # for idx in art_ids:
         #     d.pop(idx, None)
 
-    def get_aligned_indices(self, id_article):
+    def get_aligned_indices(self, text_original, text_clean):
         """
         Return a dict of key values.
-        The key is the index in the preprocessed sequence and the value is the the index of the original sequence
+        The key is the index in the preprocessed sequence and the value is the index of the original sequence
+
+        CAT - CT
+        {1: 1}
+
+        :param id_article:
+        :return: dict
+        """
+        _d = {elt[1]: elt[0] for elt in needleman_wunsch(text_original, text_clean) if elt[0] is not None and elt[1] is not None}
+        return _d
+
+    def get_aligned_indices_article(self, id_article):
+        """
+        Return a dict of key values.
+        The key is the index in the preprocessed sequence and the value is the index of the original sequence
 
         CAT - CT
         {1: 1}
@@ -111,7 +125,6 @@ class DataLoader():
 
         _d = {elt[1]: elt[0] for elt in needleman_wunsch(_text_original, _text_clean) if elt[0] is not None and elt[1] is not None}
         return _d
-
 
     def _split_into_paragraph(self, content):
         return content.splitlines(True)
