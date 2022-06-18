@@ -97,18 +97,22 @@ class DataLoader():
                 _split = [(0, d[k]["content_y"])]
                 d[k]["content_full_splitted"] = _split
 
+        if labelled_only:
+            art_ids = [101, 102, 105, 107, 108, 120, 125, 127, 129, 134, 137, 142, 145, 151, 156, 160, 172, 180, 188, 196, 301, 304, 306, 308, 309, 312]
+        else:
+            # TODO check len(df) matched art ids if needed
+            art_ids = range(len(df))
+
+        # TODO remove the complement instead
+        for idx in art_ids:
+            #d.pop(idx, None)
+            pass
+
         logging.debug("Data loaded")
+
         return d
 
-        # if labelled_only:
-        #     art_ids = [101, 102, 105, 107, 108, 120, 125, 127, 129, 134, 137, 142, 145, 151, 156, 160, 172, 180, 188, 196, 301, 304, 306, 308, 309, 312]
-        # else:
-        #     # TODO check len(df) matched art ids if needed
-        #     art_ids = range(len(df))
-        #
-        # TODO remove the complement instead
-        # for idx in art_ids:
-        #     d.pop(idx, None)
+
 
     def get_aligned_indices(self, text_original, text_clean):
         """
