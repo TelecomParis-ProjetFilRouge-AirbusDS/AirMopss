@@ -44,7 +44,7 @@ def new_article():
     session['word'] = session['article'].split()
     session['len'] = len(session['word'])
     # session['list'] = fct(session['article'])
-    session['list'] = qa_processor.process_raw_txt(session['article'])
+    session['list'] = qa_processor.get_events(session['article'])
     session['event'] = 'text2'
     # blabla = qaprocessing.
     return render_template('article.html')

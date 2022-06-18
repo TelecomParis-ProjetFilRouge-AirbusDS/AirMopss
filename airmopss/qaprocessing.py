@@ -98,7 +98,7 @@ class QaProcessing():
         return gn_subj, gn_subj_idx
 
     # TODO : complete function
-    def process_raw_txt(self, input_txt):
+    def get_events(self, input_txt):
         """
 
         :param input_txt:
