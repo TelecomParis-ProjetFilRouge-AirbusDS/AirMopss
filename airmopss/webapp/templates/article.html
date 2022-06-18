@@ -60,16 +60,24 @@ strong:hover {
     </style>
   <body>
     <p class="article" >
-    {% for i in range(session.len) %}
-    {% if i in session.list %}
+      {% set ns = namespace(current_index=0) %}
+      {% set iterations_nb = indices_list|length %}
+      {% for i in range(iterations_nb) %}
+        
+        {% set next_event = indices_list.pop(0) %}
 
-    <strong class="tooltip" data-event={{ session.word[i] }}> {{ session.word[i]  }}
-    <span class="tooltiptext">l'événement lié au mot {{ session.word[i] }} </span>
-    </strong>
-    {% else %}
-         {{  session.word[i] }}
-    {% endif %}
-    {% endfor %}
+        {{ article[ns.current_index:next_event[0]] }}
+
+        <strong class="tooltip" data-event={{ article[next_event[0]:next_event[1]] }}>
+          {{ article[next_event[0]:next_event[1]] }}
+          <span class="tooltiptext">{{ article[next_event[0]:next_event[1]] }} </span>
+        </strong>
+
+        {% set ns.current_index = next_event[1] %}
+      {% endfor %}
+
+      {{ article[ns.current_index:article_len] }}
+
     </p>
     <div id="event-container">
 

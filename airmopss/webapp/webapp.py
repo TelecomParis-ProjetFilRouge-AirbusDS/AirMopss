@@ -36,18 +36,15 @@ def index():
 
 @app.route('/new-article', methods=['POST'])
 def new_article():
-    app.logger.warning('A new article processed (%d apples)', 42)
-    session['article'] = request.form['article']
+    article = request.form['article']
 
-    # logging.info(type(session['article']))
+    # TODO: article includes \r after \n. Should they be removed ?
+    app.logger.warning(repr(article))
 
-    session['word'] = session['article'].split()
-    session['len'] = len(session['word'])
-    # session['list'] = fct(session['article'])
-    session['list'] = qa_processor.get_events(session['article'])
-    session['event'] = 'text2'
-    # blabla = qaprocessing.
-    return render_template('article.html')
+    events = qa_processor.get_events(article)
+    indices_list = [(event["start_idx"], event["end_idx"]) for event in events["events"]]
+
+    return render_template('article.html', article=article, article_len=len(article), events=events, indices_list=indices_list)
 
 # if __name__ == '__main__':
 #     app.run(debug=True)

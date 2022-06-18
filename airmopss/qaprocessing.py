@@ -123,8 +123,8 @@ class QaProcessing():
                     }
                 },
                 {
-                    "start_idx": 259,
-                    "end_idx": 263,
+                    "start_idx": 261,
+                    "end_idx": 265,
                     "details": {
                         "actor": "Luis Fonsi",
                         # TODO: COMPLETE
