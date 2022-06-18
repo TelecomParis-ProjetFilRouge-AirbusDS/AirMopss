@@ -1,27 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This module contains the Question Answering processing class
+The module handles the Question Answering processing class
 """
+
 from .preprocessing import *
-from .spacy_utils import *
-from .utils import *
 from .dataloader import DataLoader
 
-import re
 from transformers import pipeline
 import logging
 
 class QaProcessing():
     """
-    Class QaProcessing
+    The class QaProcessing handles the QA task.
     """
-
     def __init__(self, config, data_loader: DataLoader):
         """
-        Constructor
+        Constructor is initialized using 'config' parameter and a DataLoader
 
-        :param config:
+        :param config: arguments in a namespace
         :param data_loader:
         """
         logging.info(f"Building {__class__.__name__} instance")
@@ -35,7 +32,7 @@ class QaProcessing():
 
     def set_questions(self):
         """
-        Suite de patterns de questions
+        List of patterns of questions
 
         :return:
         """
@@ -58,7 +55,7 @@ class QaProcessing():
 
     def ask_question(self):
         """
-
+        Handles command line input question
         """
         while True:
             q = input("Enter a question: ")

@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. warning:: This documentation is under construction. Don't rely on it.
+.. warning:: This documentation is under construction.
 
 Welcome to AirMopss's documentation!
 ====================================

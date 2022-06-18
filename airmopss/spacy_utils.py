@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Module that declares Spacy utility functions
+"""
 
 import spacy
 
@@ -7,7 +10,9 @@ from .utils import *
 
 def get_labels(pipeline: object = "ner", model: object = "en_core_web_sm") -> object:
     """
-    Available names: ['tok2vec', 'tagger', 'parser', 'senter', 'ner', 'attribute_ruler', 'lemmatizer']
+    Returns the labels of a specified Spacy pipe
+
+    Available pipes: ['tok2vec', 'tagger', 'parser', 'senter', 'ner', 'attribute_ruler', 'lemmatizer']
     """
     # L'ensemble des labels
     head(pipeline)
@@ -17,13 +22,14 @@ def get_labels(pipeline: object = "ner", model: object = "en_core_web_sm") -> ob
 
 def get_any_tag_label():
     """
-
+    Returns all labels of any Spacy tag
     :return:
     """
     print(spacy.glossary.GLOSSARY)
 
 def explain(term):
     """
+    Returns the description of a spacy term/label
 
     :param term:
     :return:
@@ -32,6 +38,7 @@ def explain(term):
 
 def get_infos(doc):
     """
+    Returns the infos on named entities detected in a doc
 
     :param doc:
     :return:
