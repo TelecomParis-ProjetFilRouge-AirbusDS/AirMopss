@@ -32,8 +32,15 @@ class DataLoader():
 
         self.config = config
         self.data = self.load_data(config.csv_file)
-        # en_core_web_sm ou autre
-        self.pipeline = self.get_pipeline(config.spacy_pipeline)
+
+
+        # TODO : to remove before delivery
+        if config.debug_mini_load:
+            pass
+        else:
+            # en_core_web_sm ou autre
+            self.pipeline = self.get_pipeline(config.spacy_pipeline)
+
         self.sequences = []
 
     def load_data(self, csv_file, labelled_only=False):
@@ -80,7 +87,6 @@ class DataLoader():
             for k, v in d.items():
                 _split = [(0, d[k]["content_full"])]
                 d[k]["content_full_splitted"] = _split
-
 
         elif self.config.split == 'paragraph':
             for k, v in d.items():

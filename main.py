@@ -20,7 +20,7 @@ def main(config):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="How to launch airmopss")
-    parser.add_argument('--csv_file', type=str, default='data/newsdata.csv',
+    parser.add_argument('--csv_file', type=str, default='airmopss/data/newsdata.csv',
                         help="file of news wires (api format), default: data/newsdata.txt")
     parser.add_argument('--labels_file', type=str, default='data/newsdata_labels.txt',
                         help="file of labeled articles, default: data/newsdata_labels.txt")
@@ -32,6 +32,7 @@ if __name__ == '__main__':
                         help="splitting mode of content [article|paragraph], default: article")
     parser.add_argument('--labelled_only', type=utils.str2bool, default=True,
                         help="loads all data or labelled ones only, default: True")
+    parser.add_argument('--debug_mini_load', type=utils.str2bool, default=False)
     config = parser.parse_args()
 
     main(config)

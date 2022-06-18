@@ -25,8 +25,12 @@ class QaProcessing():
 
         self.data_loader = data_loader
 
-        self.spacy_pipeline = data_loader.pipeline
-        self.qa_pipeline = pipeline("question-answering")  # , model="distilbert-base-cased-distilled-squad", tokenizer="bert-base-cased")
+        # TODO : to remove before delivery
+        if config.debug_mini_load:
+            pass
+        else:
+            self.spacy_pipeline = data_loader.pipeline
+            self.qa_pipeline = pipeline("question-answering")  # , model="distilbert-base-cased-distilled-squad", tokenizer="bert-base-cased")
 
         self.questions = self.set_questions()
 
