@@ -172,6 +172,12 @@ class DataLoader():
         """
         return self.data[idx]["content_full"]
 
+    def get_data_content_clean(self, idx):
+        """
+        returns field containing cleaned content of article ( title, description, content_x, content_y)
+        """
+        return self.data[idx]["content_clean"]
+
     def get_data_content_paragraphs(self, idx):
         """
         returns field containing concat of title, description, content_x, content_y
