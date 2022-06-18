@@ -105,8 +105,6 @@ class QaProcessing():
         :return:
         """
 
-        text_original  = input_txt
-
         # preprocessing step
         text_clean = clean_text(input_txt)
 
@@ -114,13 +112,28 @@ class QaProcessing():
         paragraphs = split_paragraphs(text_clean)
 
         # TODO : implement what is necessary to display on webapp
-        list = []
-        for i, word in enumerate(text_clean.split()):
-            if 'b' in word:
-                list.append(i)
+        mock_event_list = {
+            "events": [
+                {
+                    "start_idx": 63,
+                    "end_idx": 68,
+                    "details": {
+                        "actor": "Mario Draghi",
+                        # TODO: COMPLETE
+                    }
+                },
+                {
+                    "start_idx": 259,
+                    "end_idx": 263,
+                    "details": {
+                        "actor": "Luis Fonsi",
+                        # TODO: COMPLETE
+                    }
+                }
+            ]
+        }
 
-        logging.debug("!!!!!!!!!!!! List of indices", list)
-        return list
+        return mock_event_list
 
     def process(self):
         """
