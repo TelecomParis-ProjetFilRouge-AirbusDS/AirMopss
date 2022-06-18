@@ -97,53 +97,43 @@ class QaProcessing():
 
         return gn_subj, gn_subj_idx
 
-    def preprocess(self, idx):
-        """
-
-        :param idx:
-        :return:
-        """
-
-        #article = self.df.iloc[idx].content_y
-        article = self.data_loader.get_data_content_full(idx) # retrun tilte, descr, contents...
-        _content_x =  self.data_loader.get_data_content_x(idx)
-        _content_y =  self.data_loader.get_data_content_y(idx)
-        _, article_splitted = self.data_loader.get_data_content_full_splitted(idx)[0]
-
-        # UGLY below, splittnig partially done on data_loader
-        article = clean_text(article)
-
-        # start = self.df.iloc[idx].content_y.find(self.df.iloc[idx].content_x[:50])
-        start = _content_y.find(_content_x[:50])
-
-        if start != -1:
-            article = article[start:]
-
-        # TODO : the following would need to be included in preprocessing.py
-        clean_article_regex = re.sub("\n\S+\n\n+", "\n", article)
-        clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
-        paragraphs = clean_article_regex.split('\n')
-        paragraphs = [paragraph for paragraph in paragraphs if (len(paragraph.split(' ')) > 10
-                                                                and "Show caption" not in paragraph
-                                                                and "Getty images" not in paragraph
-                                                                and "@" not in paragraph)]
-        return paragraphs, article
-
     # TODO : complete function
-    def process_raw_txt(self, input_txt):
+    def get_events(self, input_txt):
         """
 
         :param input_txt:
         :return:
         """
-        # TODO change idx to sth else
-        paragraphs, article = self.preprocess_txt(input_txt)
 
-        list = []
-        for i, word in enumerate(input_txt.split()):
-            if 'b' in word:
-                list.append(i)
-        return list
+        # preprocessing step
+        text_clean = clean_text(input_txt)
+
+        # split in paragraphs
+        paragraphs = split_paragraphs(text_clean)
+
+        # TODO : implement what is necessary to display on webapp
+        mock_event_list = {
+            "events": [
+                {
+                    "start_idx": 63,
+                    "end_idx": 68,
+                    "details": {
+                        "actor": "Mario Draghi",
+                        # TODO: COMPLETE
+                    }
+                },
+                {
+                    "start_idx": 261,
+                    "end_idx": 265,
+                    "details": {
+                        "actor": "Luis Fonsi",
+                        # TODO: COMPLETE
+                    }
+                }
+            ]
+        }
+
+        return mock_event_list
 
     def process(self):
         """
@@ -157,12 +147,13 @@ class QaProcessing():
             #clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
             #clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
 
-            paragraphs, article = self.preprocess(idx)
+            article = self.data_loader.get_data_content_full(idx)
+            paragraphs = self.data_loader.get_data_content_paragraphs(idx)
 
             answers_all = []
             for paragraph in paragraphs:
 
-                #print(paragraph, end='\n\n')
+                print(paragraph, end='\n\n')
 
                 doc = self.spacy_pipeline(paragraph)
 

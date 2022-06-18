@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import re
+
 def get_stop_sentences():
     stops = [ s for l in _stop_sentences for s in l ]
     return stops
@@ -40,7 +42,7 @@ _stop_sentences = [
 _unwanted_sequences = [
     "Show caption",
     "Getty images",
-    "@"
+    #"@"
 ]
 
 stop_sentences = get_stop_sentences()
@@ -77,6 +79,16 @@ def tokens_to_list_unique(tokens):
     l = list(dict.fromkeys(l))
     return  l
 
+def split_paragraphs(txt):
+    _cleaned = re.sub("\n\S+\n\n+", "\n", txt)
+    _cleaned = re.sub("\n+", "\n", _cleaned)
+    paragraphs = _cleaned.split('\n')
+    paragraphs = [paragraph for paragraph in paragraphs]
+    return paragraphs
+
 if __name__ == '__main__':
-    s = "test\n\ntsdqfd gshsh st hsrh rshvc rshs r h f e s  t\n\nGetty images fdsqdfqsdq\n" + "Share on Twitter\n"
-    print(clean_text(s))
+    s = "test\n\ntsdqfd gshsh st hsrh rshvc rshs r h f e s  t\n\nGetty images c b n j k lm u y fdsqdfqsdq\n\nHacked Gitty imiges c b n j k lm u y fdsqdfqsdq\n" + "Share on Twitter\n"
+
+    print("\n### s : \n", s)
+    print("\n### clean : \n", clean_text(s))
+    print("\n### paragraphs: \n", split_paragraphs(clean_text(s)))

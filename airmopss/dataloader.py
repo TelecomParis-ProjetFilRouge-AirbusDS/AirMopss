@@ -55,7 +55,9 @@ class DataLoader():
             _x = str(d[k]["content_x"])
             _y = str(d[k]["content_y"])
             d[k]["content_full"] = _t+"\n\n"+_d+"\n\n"+_y
-            d[k]["content_clean"] = self.preprocess(_t, _d, _x, _y)
+            d[k]["content_clean"] = self.load_data_preprocess(_t, _d, _x, _y)
+            # TODO à réanalyser
+            d[k]["content_paragraphs"] = [line for line in self._split_into_paragraph(d[k]["content_clean"][1])]
 
         # TODO handle split into paragraph, sentence
         _split = []
@@ -170,6 +172,18 @@ class DataLoader():
         """
         return self.data[idx]["content_full"]
 
+    def get_data_content_clean(self, idx):
+        """
+        returns field containing cleaned content of article ( title, description, content_x, content_y)
+        """
+        return self.data[idx]["content_clean"]
+
+    def get_data_content_paragraphs(self, idx):
+        """
+        returns field containing concat of title, description, content_x, content_y
+        """
+        return self.data[idx]["content_paragraphs"]
+
     def get_data_content_full_splitted(self, idx):
         """
         returns field containing concat of title, description, content_x, content_y splitted in article, paragraph or sentence
@@ -183,10 +197,10 @@ class DataLoader():
         else:
             return t
 
-    def preprocess(self, txt):
-        return txt
+    #def preprocess(self, txt):
+    #    return txt
 
-    def preprocess(self, _title, _description, _content_x, _content_y):
+    def load_data_preprocess(self, _title, _description, _content_x, _content_y):
         """
 
         :param idx:
@@ -200,6 +214,7 @@ class DataLoader():
 
         article = _title+"\n\n"+_description+"\n\n"+_cleaned_content
 
+        # TODO : use split_paragraphs() function instead
         clean_article_regex = re.sub("\n\S+\n\n+", "\n", article)
         clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
         paragraphs = clean_article_regex.split('\n')
