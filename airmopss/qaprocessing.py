@@ -113,6 +113,7 @@ class QaProcessing():
         # split in paragraphs
         paragraphs = split_paragraphs(text_clean)
 
+        # TODO : implement what is necessary to display on webapp
         list = []
         for i, word in enumerate(text_clean.split()):
             if 'b' in word:

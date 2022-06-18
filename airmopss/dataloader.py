@@ -56,7 +56,7 @@ class DataLoader():
             _y = str(d[k]["content_y"])
             d[k]["content_full"] = _t+"\n\n"+_d+"\n\n"+_y
             d[k]["content_clean"] = self.load_data_preprocess(_t, _d, _x, _y)
-            #
+            # TODO à réanalyser
             d[k]["content_paragraphs"] = [line for line in self._split_into_paragraph(d[k]["content_clean"][1])]
 
         # TODO handle split into paragraph, sentence
@@ -214,6 +214,7 @@ class DataLoader():
 
         article = _title+"\n\n"+_description+"\n\n"+_cleaned_content
 
+        # TODO : use split_paragraphs() function instead
         clean_article_regex = re.sub("\n\S+\n\n+", "\n", article)
         clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
         paragraphs = clean_article_regex.split('\n')
