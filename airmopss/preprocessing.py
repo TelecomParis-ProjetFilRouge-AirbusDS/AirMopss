@@ -83,7 +83,8 @@ def split_paragraphs(txt):
     _cleaned = re.sub("\n\S+\n\n+", "\n", txt)
     _cleaned = re.sub("\n+", "\n", _cleaned)
     paragraphs = _cleaned.split('\n')
-    paragraphs = [paragraph for paragraph in paragraphs]
+    ## useless ? 
+    # paragraphs = [paragraph for paragraph in paragraphs]
     return paragraphs
 
 if __name__ == '__main__':
