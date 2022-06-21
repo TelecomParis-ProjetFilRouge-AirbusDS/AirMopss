@@ -161,21 +161,23 @@ class QaProcessing():
                         preds[qu] = answer
                         scores[qu] = score
 
-                answers_all += answers_gn
+                answers_all.append(answers_gn)
 
 
             ## Update the character count variable
             paragraph_len += len(paragraph)
         
 
-        events = [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]], 
-                    "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
-                    "details" : {
-                        "Who" : gn_subj_all[i],
-                        "What" : answers_all[i][0],
-                        "When" : answers_all[i][1],
-                        "Where" : answers_all[i][2]
-                    }} for i in range(len(gn_subj_all) ]
+        events = { "events" :
+                       [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
+                        "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
+                        "details" : {
+                            "Who" : gn_subj_all[i],
+                            "What" : answers_all[i][0],
+                            "When" : answers_all[i][1],
+                            "Where" : answers_all[i][2]
+                            }
+                    } for i in range(len(gn_subj_all)) ]}
 
         return events
     
