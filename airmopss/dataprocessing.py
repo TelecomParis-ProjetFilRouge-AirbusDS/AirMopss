@@ -15,14 +15,19 @@ class DataProcessing():
     """
     The class is a handler to launch tasks.
     """
-    def __init__(self, config, data_loader: DataLoader):
+    def __init__(self, config, data_loader: DataLoader, logger=None):
         """
         Constructor is initialized using 'config' parameter and a DataLoader
 
         :param config: arguments in a namespace
         :param data_loader:
         """
-        logging.info(f"Building {__class__.__name__} instance")
+        if logger == None:
+            self.logger = logging
+        else:
+            self.logger = logger
+
+        self.logger.info(f"Building {__class__.__name__} instance")
 
         self.config = config
         self.data = data_loader.data

@@ -14,14 +14,19 @@ class QaProcessing():
     """
     The class QaProcessing handles the QA task.
     """
-    def __init__(self, config, data_loader: DataLoader):
+    def __init__(self, config, data_loader: DataLoader, logger=None):
         """
         Constructor is initialized using 'config' parameter and a DataLoader
 
         :param config: arguments in a namespace
         :param data_loader:
         """
-        logging.info(f"Building {__class__.__name__} instance")
+        if logger == None:
+            self.logger = logging
+        else:
+            self.logger = logger
+
+        self.logger.info(f"Building {__class__.__name__} instance")
 
         self.data_loader = data_loader
 

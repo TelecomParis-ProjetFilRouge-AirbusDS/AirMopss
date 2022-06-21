@@ -22,13 +22,17 @@ class DataLoader():
     "id, author, title, description, url, urlToImage, publishedAt, content_x, source.id, source.name, content_y"
 
     """
-    def __init__(self, config):
+    def __init__(self, config, logger=None):
         """
         Constructor is initialized using 'config' parameter
 
         :param config: arguments in a namespace
         """
-        logging.info(f"Building {__class__.__name__} instance")
+        if logger == None:
+            self.logger = logging
+        else:
+            self.logger = logger
+        self.logger.info(f"Building {__class__.__name__} instance")
 
         self.config = config
         self.data = self.load_data(config.csv_file)
@@ -65,7 +69,7 @@ class DataLoader():
         :param labelled_only: keeps specific labeled articles only (experimental)
         :return: a dictionnary of articles (key as id)
         """
-        logging.debug("Loading data")
+        self.logger.debug("Loading data")
         df = pd.read_csv(csv_file)
 
         # convert to a dictionary
@@ -114,7 +118,7 @@ class DataLoader():
             #d.pop(idx, None)
             pass
 
-        logging.debug("Data loaded")
+        self.logger.debug("Data loaded")
 
         return d
 
