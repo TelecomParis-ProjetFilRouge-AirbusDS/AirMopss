@@ -11,9 +11,8 @@
     {% block body %}
       {# Début du bloc "body", dont vous devez modifier le contenu #}
       <form action="/new-article" method="post">
-            <textarea type=text name="article" placeholder="Article" rows="20" cols="100">
-
-            </textarea>
+          <div class="button"><input type=submit value="Submit"></div>
+          <textarea type=text name="article" placeholder="Copy paste the content here" rows="30" cols="150"></textarea>
           <div class="button"><input type=submit value="Submit"></div>
         </form>
     {% endblock %}
