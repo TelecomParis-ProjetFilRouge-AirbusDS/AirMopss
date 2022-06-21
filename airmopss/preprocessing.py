@@ -1,16 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+The module declares preprocessing utility functions
+"""
 
 import re
 
+
 def get_stop_sentences():
-    stops = [ s for l in _stop_sentences for s in l ]
+    """
+    Returns a list of sentences that should be excluded from source
+
+    :return: list of str
+    """
+    stops = [stp for lst in _stop_sentences for stp in lst]
     return stops
+
 
 stop_sentences_reuters = [
     "Register now for FREE unlimited access to Reuters.com Register",
     "Our Standards: The Thomson Reuters Trust Principles.",
 ]
+
 stop_sentences_any = [
     "Advertisement",
     "Get in touch",
@@ -42,49 +53,115 @@ _stop_sentences = [
 _unwanted_sequences = [
     "Show caption",
     "Getty images",
-    #"@"
+    # "@"
 ]
 
 stop_sentences = get_stop_sentences()
 
+
 def article_to_list(txt):
+    """
+    Returns the text as a list. Split on end of line.
+
+    :param txt:
+    :return:
+    """
+
     return txt.split('\n')
 
+
 def remove_stop_sentences(l_txt):
-    l_txt = [s for s in l_txt if s not in stop_sentences]
+    """
+    Removes complete sentences from a list.
+
+    :param l_txt: full list
+    :return: processed list
+    """
+
+    l_txt = [stp for stp in l_txt if stp not in stop_sentences]
     return l_txt
+
 
 def remove_unwanted_sequences(l_txt):
+    """
+    Removes parts of sentences from a list of sentences.
+
+    :param l_txt:
+    :return: processed list
+    """
     for pattern in _unwanted_sequences:
-        l_txt = [s for s in l_txt if pattern not in s]
+        l_txt = [valid_seq for valid_seq in l_txt if pattern not in valid_seq]
     return l_txt
 
+
 def remove_short_lines(l_txt, min_num_words=10):
+    """
+    Removes sentences that are composed of less than 'min_num_words' words.
+
+    :param l_txt:
+    :param min_num_words: defaults to 10
+    :return: processed list
+    """
     l_txt = [line for line in l_txt if len(line.split(' ')) > min_num_words]
     return l_txt
 
-def list_to_text(l):
-    return "\n".join(l)
 
-def clean_text(txt):
+def list_to_text(lst):
+    r"""
+    Concatenates elements a list in a string separated by character eol '\n'
+
+    :param lst:
+    :return:
+    """
+    return "\n".join(lst)
+
+
+def clean_text(txt, min_num_words=10):
+    """
+    Pipeline of preprocessing over the text 'txt':
+    * removal of unwanted sentences (stop sentences),
+    * removal of sentences containing unwanted patterns,
+    * removal of sentences a minimal length.
+
+    :param txt: a string (str) of text
+    :param min_num_words:
+    :return: a list of sentences
+    """
+
     l_txt = article_to_list(txt)
     l_txt = remove_stop_sentences(l_txt)
     l_txt = remove_unwanted_sequences(l_txt)
-    l_txt = remove_short_lines(l_txt)
+    l_txt = remove_short_lines(l_txt, min_num_words)
     return list_to_text(l_txt)
 
 
 def tokens_to_list_unique(tokens):
-    l = [" ".join([str(elt) for elt in token]).strip() for token in tokens]
-    l = list(dict.fromkeys(l))
-    return  l
+    """
+    TODO to complete
+
+    :param tokens:
+    :return:
+    """
+    lst = [" ".join([str(elt) for elt in token]).strip() for token in tokens]
+    lst = list(dict.fromkeys(lst))
+    return lst
+
 
 def split_paragraphs(txt):
+    """
+    Splits the text 'txt' into paragraphs.
+
+    The splitting pattern is two consecutive EOL or two EOL separated by space characters.
+
+    :param txt: a string (str) of text
+    :return: a list of sentences
+    """
     _cleaned = re.sub("\n\S+\n\n+", "\n", txt)
     _cleaned = re.sub("\n+", "\n", _cleaned)
     paragraphs = _cleaned.split('\n')
     paragraphs = [paragraph for paragraph in paragraphs]
     return paragraphs
+
 
 if __name__ == '__main__':
     s = "test\n\ntsdqfd gshsh st hsrh rshvc rshs r h f e s  t\n\nGetty images c b n j k lm u y fdsqdfqsdq\n\nHacked Gitty imiges c b n j k lm u y fdsqdfqsdq\n" + "Share on Twitter\n"

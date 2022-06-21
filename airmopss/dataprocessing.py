@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This module contains the data processing class
+Handles the DataProcessing class
 """
 
 from .qaprocessing import QaProcessing
@@ -13,27 +13,37 @@ import logging
 
 class DataProcessing():
     """
-    This class **is** the application. It contains everything related to the interface, and the core logic of the project.
+    The class is a handler to launch tasks.
     """
     def __init__(self, config, data_loader: DataLoader):
         """
-        Class initialization
+        Constructor is initialized using 'config' parameter and a DataLoader
+
+        :param config: arguments in a namespace
+        :param data_loader:
         """
         logging.info(f"Building {__class__.__name__} instance")
 
         self.config = config
         self.data = data_loader.data
         self.data_loader = data_loader
-        self.pipeline = data_loader.pipeline
+
+        # TODO : to remove before delivery
+        if config.debug_mini_load:
+            pass
+        else:
+            self.pipeline = data_loader.pipeline
 
         if "qa" == config.task:
             self.qa = QaProcessing(config, data_loader)
 
     def run(self, task="extract_np"):
         """
-        App launch, with main window and everything. Vroum vroum
+        Launches processing based on the 'task' parameter.
 
-        :return:
+        The default task is passed though the `config.task` parameter.
+
+        :return: None
         """
         if task == "extract_np":
             self._extract_np()
@@ -50,13 +60,17 @@ class DataProcessing():
 
     def get_elements(self, doc, dep='nsubj', exclude_pos=['PRON'], include_ner=['GPE', 'PERSON', 'ORG', 'NORP']):
         """
-        Displays and returns elements with a specific dependency and filtered on excluded pos and included ner
+        Returns a list of elements with the specific dependency 'dep'.
+        The elements are filtered and limited to one that exclude parts of speech 'exclude_pos'
+        and that contain at least one named named entity among 'include_ner'.
 
-        :param doc:
-        :param dep:
-        :param exclude_pos:
-        :param include_ner:
-        :return:
+        # TODO detailed the element structure
+
+        :param doc: the text to match on
+        :param dep: the dependency to match on
+        :param exclude_pos: the excluded parts of speech
+        :param include_ner: a must have named entity
+        :return: a list of patterns matching the dependency
         """
         elements_list = []
         for word in doc:
@@ -68,13 +82,12 @@ class DataProcessing():
                 if flag:
                     elements_list.append([elt for elt in word.subtree])
 
-        # for elt in elements_list:
-        #    print(elt)
         return elements_list
 
     def _extract_np(self):
         """
 
+        :return:
         """
         titles, descriptions, articles = self.data
         nlp = self.pipeline
@@ -107,10 +120,12 @@ class DataProcessing():
 
     def score_func(self, gt, pred):
         """
-        Calcul des faux positifs, vrais positifs, faux négatifs
+        Computes the F1 score
 
-        :param gt: sets
-        :param pred: sets
+        # TODO what are gt and pred, rename variables
+        :param gt:
+        :param pred:
+        :return: the computed F1 score
         """
         TP = len(gt.intersection(pred))
         FN = len(gt - pred)

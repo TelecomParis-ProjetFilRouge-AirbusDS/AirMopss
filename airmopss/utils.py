@@ -1,18 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-
-
-def head(title):
-    print('')
-    print('-'*40)
-    print(title)
-    print('-'*40)
-    print('')
-
-
-def str2bool(v):
-    return v.lower() in ('true')
+"""
+Module that declares static utility functions
+"""
 
 from itertools import product
 from collections import deque
@@ -22,7 +12,7 @@ from collections import deque
 
 def needleman_wunsch(x, y):
     """
-    Run the Needleman-Wunsch algorithm on two sequences.
+    Runs the Needleman-Wunsch algorithm on two sequences. It detects the missing indexes over two sequences of text.
 
     x, y -- sequences.
 
@@ -86,3 +76,24 @@ def needleman_wunsch(x, y):
 
     return list(alignment)
 
+
+def head(title):
+    """
+
+    :param title:
+    :return:
+    """
+    print('')
+    print('-' * 40)
+    print(title)
+    print('-' * 40)
+    print('')
+
+
+def str2bool(v):
+    """
+
+    :param v:
+    :return:
+    """
+    return v.lower() in ('true')

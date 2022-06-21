@@ -1,15 +1,45 @@
-.. warning:: This documentation is under construction. Don't rely on it.
+.. warning:: This documentation is under construction.
 
 Quickstart
 ==========
 
-To run airmopss, go to the root folder of the file and run:
+==================================
+What can be done do with AirMopss?
+==================================
 
->>> python main.py
+AirMopss is a student project that explores event extraction. It was mainly built over Question Answering features.
+
+AirMopss has two modes. It can be run:
+
+* on command line
+* over a Flask web server
+
+========================
+Launch with command-line
+========================
+
+Go to the root folder of the package and run:
+
+>>> $ python main.py
 
 To get details on parameters that you can use run:
 
 >>> $ python main.py --help
+
+========================
+Launch with Flask server
+========================
+
+Go to the root folder of the package and depending on the OS you can run the following commands.
+
+On Linux/MacOS:
+
+>>> $ ./launch_server.sh
+
+On Windows:
+
+>>> > launch_server.bat
+
 
 
 

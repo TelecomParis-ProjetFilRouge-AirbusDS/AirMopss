@@ -1,6 +1,14 @@
 airmopss package
 ================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   airmopss.webapp
+
 Submodules
 ----------
 

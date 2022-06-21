@@ -25,6 +25,9 @@ config.task='qa'
 config.split='article'
 config.labelled_only=True
 
+# TODO : to remove before delivery
+config.debug_mini_load = False
+
 data_loader = DataLoader(config)
 data_processor = DataProcessing(config, data_loader)
 qa_processor = QaProcessing(config, data_loader)
