@@ -6,20 +6,20 @@
         <h1>Event Extractions</h1>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='latest_article.js', version='12355qsdf6') }}"></script>
-  </head>
 
     <style>
-.article {
+div.article {
   font-family: georgia;
   /*text-align: center;*/
   /*font-style: italic;*/
 
   box-sizing: content-box;
-  max-width: 25em;
+  max-width: 75%;
   margin-top: 2em;
   border:1px solid black;
   word-wrap: break-word;
   white-space: normal;
+  padding: 20px;
 }
 
 strong {
@@ -32,8 +32,7 @@ strong:hover {
 }
 
 .tooltip {
-  position: absolute;
-  display: inline-block;
+  display: inline;
   border-bottom: 1px dotted black;
   /* color of the span text */
   color: rgb(119, 162, 241);
@@ -58,19 +57,25 @@ strong:hover {
 }
 
     </style>
+
+  </head>
+
   <body>
-    <p class="article" >
+    <div>
+      Nombre d'événements : {{ events_list|length }}
+    </div>
+    <div class="article" >
       {% set ns = namespace(current_index=0) %}
-      {% set iterations_nb = indices_list|length %}
+      {% set iterations_nb = events_list|length %}
       {% for i in range(iterations_nb) %}
         
-        {% set next_event = indices_list.pop(0) %}
+        {% set next_event = events_list.pop(0) %}
 
         {{ article[ns.current_index:next_event[0]] }}
 
-        <strong class="tooltip" data-event={{ article[next_event[0]:next_event[1]] }}>
+        <strong class="tooltip" data-event="{{ article[next_event[0]:next_event[1]] }}">
           {{ article[next_event[0]:next_event[1]] }}
-          <span class="tooltiptext">{{ article[next_event[0]:next_event[1]] }} </span>
+          <span class="tooltiptext">{{ next_event[2] }}</span>
         </strong>
 
         {% set ns.current_index = next_event[1] %}
@@ -78,7 +83,7 @@ strong:hover {
 
       {{ article[ns.current_index:article_len] }}
 
-    </p>
+    </div>
     <div id="event-container">
 
     </div>

@@ -67,15 +67,14 @@ class QaProcessing():
             print(q)
 
 
-    # TODO : include Dictionnaire de mapping (dct_mapping) entre articles de base "articles[X]" et article nettoyé doc.text
     def get_gn_subjs(self, doc, increment=0):
         """
         Extraire l'ensemble des groupes nominaux sujets (non-pronominaux) qui sont des entités ['GPE', 'PERSON', 'ORG', 'NORP'] et les index de début et de fin
 
-        ICIC ON DECRIT DCE QUON RENVIE
+        Renvoie deux listes : [GN1, GN2, GN3, ...] et leurs index dans doc [[start_gn1, stop_gn1],[start_gn2 , stop_gn2],[start_gn3 , stop_gn3], ...]
 
         :param doc:
-        :return:
+        :return (list,list):
         """
         np_list_subj = []
         gn_subj_idx = []
@@ -89,7 +88,7 @@ class QaProcessing():
                     np_list_subj.append([elt for elt in word.subtree])
                     word_index = [elt.idx for elt in word.subtree]
                     word_len = [len(elt) for elt in word.subtree]
-                    idx = [word_index[0], word_index[-1] + word_len[-1]]
+                    idx = [word_index[0] + increment, word_index[-1] + word_len[-1] + increment]
                     gn_subj_idx.append(idx)
 
         # reconcatene en liste de string
@@ -98,12 +97,22 @@ class QaProcessing():
 
         return gn_subj, gn_subj_idx
 
-    # TODO : complete function
+    # TODO : complete function (DONE)
     def get_events(self, input_txt):
         """
+        Fonction qui à partir d'un input_txt, le preprocess et extrait les évènements pour renvoyer un json destiné à l'affichage webapp
+
+        [{ "start_idx": int, 
+            "end_idx" : int,
+            "details" : {
+                "Who" : str,
+                "What" : str,
+                "When" : str,
+                "Where" : str
+            }}, ... ]
 
         :param input_txt:
-        :return:
+        :return list:
         """
 
         # preprocessing step
@@ -112,29 +121,67 @@ class QaProcessing():
         # split in paragraphs
         paragraphs = split_paragraphs(text_clean)
 
-        # TODO : implement what is necessary to display on webapp
-        mock_event_list = {
-            "events": [
-                {
-                    "start_idx": 63,
-                    "end_idx": 68,
-                    "details": {
-                        "actor": "Mario Draghi",
-                        # TODO: COMPLETE
-                    }
-                },
-                {
-                    "start_idx": 261,
-                    "end_idx": 265,
-                    "details": {
-                        "actor": "Luis Fonsi",
-                        # TODO: COMPLETE
-                    }
-                }
-            ]
-        }
+        # mapping between the indices of the raw article and the cleaned article
+        mapping_dict = self.data_loader.get_aligned_indices(input_txt, text_clean)
+        
+        gn_subj_all = []
+        gn_subj_idx_all = []
+        answers_all = []
+        paragraph_len = 0
+        
+        for paragraph in paragraphs:
+            
+            doc = self.spacy_pipeline(paragraph)
+            gn_subj, gn_subj_idx = self.get_gn_subjs(doc, increment = paragraph_len)
+        
+            gn_subj_idx_all += gn_subj_idx
+            gn_subj_all += gn_subj
 
-        return mock_event_list
+            for GN in gn_subj:
+
+                scores = {'what': 5e-3, 'who': 5e-3, 'when': 5e-2, 'where': 5e-2}
+                # preds = {'what':None, 'who':None, 'when':None, 'where':None}
+                preds = {'what': "XXX", 'who': GN, 'when': "XXX", 'where': "XXX"}
+
+                answers_gn = []
+
+                for idx, question in enumerate(self.questions):
+
+                    question = question.replace("_GN_", GN)
+                    qu = question.split()[0].lower()
+                    if qu != "what":
+                        question = question.replace("_action_", preds['what'])
+
+                    result = self.qa_pipeline(question=question, context=paragraph)
+                    answer = result['answer']
+                    score = result['score']
+
+                    answers_gn.append(answer)
+
+                    if score > scores[qu]:
+                        preds[qu] = answer
+                        scores[qu] = score
+
+                answers_all.append(answers_gn)
+
+
+            ## Update the character count variable
+            paragraph_len += len(paragraph)
+        
+
+        events = { "events" :
+                       [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
+                        "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
+                        "details" : {
+                            "Who" : gn_subj_all[i],
+                            "What" : answers_all[i][0],
+                            "When" : answers_all[i][1],
+                            "Where" : answers_all[i][2]
+                            }
+                    } for i in range(len(gn_subj_all)) ]}
+
+        return events
+    
 
     def process(self):
         """
@@ -147,18 +194,25 @@ class QaProcessing():
 
             #clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
             #clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
-
+            
+            ## If launched from terminal 
             article = self.data_loader.get_data_content_full(idx)
             paragraphs = self.data_loader.get_data_content_paragraphs(idx)
 
+            gn_subj_all = []
+            gn_subj_idx_all = []
             answers_all = []
-            for paragraph in paragraphs:
+            paragraph_len = 0
 
+            for paragraph in paragraphs:
+                
                 print(paragraph, end='\n\n')
 
                 doc = self.spacy_pipeline(paragraph)
-
-                gn_subj, gn_subj_idx = self.get_gn_subjs(doc, increment=0)
+                gn_subj, gn_subj_idx = self.get_gn_subjs(doc, increment = paragraph_len)
+            
+                gn_subj_idx_all += gn_subj_idx
+                gn_subj_all += gn_subj
 
                 print("*"*30, "\n", "Paragraph:" , doc, '\n')
 
@@ -191,10 +245,13 @@ class QaProcessing():
 
                         print(question, ' : ', answer, ' score : ', score)
 
-                    answers_all.append(answers_gn)
+                    answers_all += answers_gn
 
                     # display([ key + ": " + preds[key] + " (" + str(scores[key]) + ")"  for key in preds.keys()])
                     print('\n')
+
+                ## Update the character count variable
+                paragraph_len += len(paragraph)
 
         print(answers_all)
 

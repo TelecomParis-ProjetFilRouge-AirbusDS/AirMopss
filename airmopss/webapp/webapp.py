@@ -45,9 +45,11 @@ def new_article():
     app.logger.warning(repr(article))
 
     events = qa_processor.get_events(article)
-    indices_list = [(event["start_idx"], event["end_idx"]) for event in events["events"]]
 
-    return render_template('article.html', article=article, article_len=len(article), events=events, indices_list=indices_list)
+    events_list = [(event["start_idx"], event["end_idx"], event["details"]) for event in events["events"]]
+    app.logger.info(events_list)
+
+    return render_template('article.html', article=article, article_len=len(article), events=events, events_list=events_list)
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
