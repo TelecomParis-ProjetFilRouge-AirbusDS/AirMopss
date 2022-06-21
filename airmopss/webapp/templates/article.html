@@ -71,17 +71,17 @@ strong:hover {
         
         {% set next_event = events_list.pop(0) %}
 
-        {{ article[ns.current_index:next_event[0]] }}
+        {{ article[ns.current_index:next_event[0]].replace("\n", "\n<br/>")|safe }}
 
         <strong class="tooltip" data-event="{{ article[next_event[0]:next_event[1]] }}">
-          {{ article[next_event[0]:next_event[1]] }}
+          {{ article[next_event[0]:next_event[1]].replace("\n", "\n<br/>")|safe }}
           <span class="tooltiptext">{{ next_event[2] }}</span>
         </strong>
 
         {% set ns.current_index = next_event[1] %}
       {% endfor %}
 
-      {{ article[ns.current_index:article_len] }}
+      {{ article[ns.current_index:article_len].replace("\n", "\n<br/>")|safe }}
 
     </div>
     <div id="event-container">
