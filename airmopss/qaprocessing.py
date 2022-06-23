@@ -128,6 +128,8 @@ class QaProcessing():
 
         # mapping between the indices of the raw article and the cleaned article
         mapping_dict = self.data_loader.get_aligned_indices(input_txt, text_clean)
+        #mapping_dict = self.data_loader.get_aligned_indices(input_txt, "\n".join(paragraphs))
+
         
         gn_subj_all = []
         gn_subj_idx_all = []
@@ -159,9 +161,15 @@ class QaProcessing():
 
                     result = self.qa_pipeline(question=question, context=paragraph)
                     answer = result['answer']
+                    id_start = result['start'] + paragraph_len
+                    id_end = result['end'] + paragraph_len
                     score = result['score']
+                    self.logger.info(input_txt[id_start:id_end])
+                    self.logger.info(text_clean[id_start:id_end])
 
-                    answers_gn.append(answer)
+
+                    #self.logger.info(f"Result is {result}\nAnswer to question {question} : \n {answer}\nScore: {score}\n------------------------------------------")
+                    answers_gn.append([answer, id_start, id_end, score])
 
                     if score > scores[qu]:
                         preds[qu] = answer
@@ -169,19 +177,37 @@ class QaProcessing():
 
                 answers_all.append(answers_gn)
 
-
             ## Update the character count variable
-            paragraph_len += len(paragraph)
+            paragraph_len += len(paragraph)+1
         
 
         events = { "events" :
                        [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
                         "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
                         "details" : {
+                            # "Who" : [ gn_subj_all[i], idx_start, id_end],
                             "Who" : gn_subj_all[i],
-                            "What" : answers_all[i][0],
-                            "When" : answers_all[i][1],
-                            "Where" : answers_all[i][2]
+                            "What" : {
+                                "answer": answers_all[i][0][0],
+                                "id_start": mapping_dict[answers_all[i][0][1]],
+                                "id_end": mapping_dict[answers_all[i][0][2]],
+                                "score": answers_all[i][0][3],
+                            },
+                            # answers_all[i][0]
+                            "When" : {
+                                "answer": answers_all[i][1][0],
+                                "id_start": mapping_dict[answers_all[i][1][1]],
+                                "id_end": mapping_dict[answers_all[i][1][2]],
+                                "score": answers_all[i][1][3],
+                            },
+                            #answers_all[i][1],
+                            "Where" : {
+                                "answer": answers_all[i][2][0],
+                                "id_start": mapping_dict[answers_all[i][2][1]],
+                                "id_end": mapping_dict[answers_all[i][2][2]],
+                                "score": answers_all[i][2][3],
+                            },
+                            #answers_all[i][2]
                             }
                     } for i in range(len(gn_subj_all)) ]}
 

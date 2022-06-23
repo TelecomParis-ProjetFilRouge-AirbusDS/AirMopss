@@ -4,6 +4,7 @@
 from flask import Flask, render_template, session, request, redirect, flash
 from .webapp_getpage import *
 import argparse
+import json
 
 from ..dataloader import DataLoader
 from ..dataprocessing import DataProcessing
@@ -37,19 +38,19 @@ def index():
     app.logger.debug('index page loading')
     return render_template('index.html')
 
-@app.route('/new-article', methods=['POST'])
-def new_article():
+@app.route('/events', methods=['POST'])
+def events():
     article = request.form['article']
 
     # TODO: article includes \r after \n. Should they be removed ?
-    app.logger.warning(repr(article))
+    #app.logger.warning(repr(article))
 
     events = qa_processor.get_events(article)
 
-    events_list = [(event["start_idx"], event["end_idx"], event["details"]) for event in events["events"]]
-    app.logger.info(events_list)
+    events_list = [(event["start_idx"], event["end_idx"], json.dumps(event["details"])) for event in events["events"]]
+    #app.logger.info(events_list)
 
-    return render_template('article.html', article=article, article_len=len(article), events=events, events_list=events_list)
+    return render_template('event.html', article=article, article_len=len(article), events=events, events_list=events_list)
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
