@@ -1,5 +1,5 @@
-#event_page div.article {
-  font-family: georgia;
+#event_page .article {
+  font-family: verdana;
   /*text-align: center;*/
   /*font-style: italic;*/
 
