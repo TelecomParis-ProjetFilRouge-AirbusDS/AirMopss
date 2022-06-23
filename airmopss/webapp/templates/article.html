@@ -19,7 +19,8 @@ div.article {
   border:1px solid black;
   word-wrap: break-word;
   white-space: normal;
-  padding: 20px;
+  /* padding: 20px;*/
+  padding: 1%;
 }
 
 strong {
@@ -56,6 +57,13 @@ strong:hover {
   visibility: visible;
 }
 
+.absolute {
+  position: absolute;
+  top: 8.5em;
+  left: 79%;
+  width: 20%;
+  border: 1px solid blue;
+}
     </style>
 
   </head>
@@ -84,9 +92,7 @@ strong:hover {
       {{ article[ns.current_index:article_len].replace("\n", "\n<br/>")|safe }}
 
     </div>
-    <div id="event-container">
-
-    </div>
+    <div id="event-container" class="absolute"></div>
 
 </body>
 </html>
