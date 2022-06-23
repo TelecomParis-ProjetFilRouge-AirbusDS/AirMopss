@@ -174,7 +174,7 @@ class QaProcessing():
 
 
             ## Update the character count variable
-            paragraph_len += len(paragraph)
+            paragraph_len += len(paragraph)+1
         
 
         events = { "events" :
