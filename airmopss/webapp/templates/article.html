@@ -81,7 +81,7 @@ strong:hover {
 
         {{ article[ns.current_index:next_event[0]].replace("\n", "\n<br/>")|safe }}
 
-        <strong class="tooltip" data-event="{{ article[next_event[0]:next_event[1]] }}">
+        <strong class="tooltip" data-event="{{ next_event[2] }}">
           {{ article[next_event[0]:next_event[1]].replace("\n", "\n<br/>")|safe }}
           <span class="tooltiptext">{{ next_event[2] }}</span>
         </strong>
@@ -92,7 +92,12 @@ strong:hover {
       {{ article[ns.current_index:article_len].replace("\n", "\n<br/>")|safe }}
 
     </div>
-    <div id="event-container" class="absolute"></div>
+    <div id="event-container" class="absolute">
+      Who: <div id='who'> </div>
+      What: <div id='what'> </div>
+      Where: <div id='where'> </div>
+      When: <div id='when'> </div>
+    </div>
 
 </body>
 </html>
