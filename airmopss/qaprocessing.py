@@ -185,22 +185,22 @@ class QaProcessing():
                             "Who" : gn_subj_all[i],
                             "What" : {
                                 "answer": answers_all[i][0][0],
-                                "id_start": answers_all[i][0][1],
-                                "id_end": answers_all[i][0][2],
+                                "id_start": mapping_dict[answers_all[i][0][1]],
+                                "id_end": mapping_dict[answers_all[i][0][2]],
                                 "score": answers_all[i][0][3],
                             },
                             # answers_all[i][0]
                             "When" : {
                                 "answer": answers_all[i][1][0],
-                                "id_start": answers_all[i][1][1],
-                                "id_end": answers_all[i][1][2],
+                                "id_start": mapping_dict[answers_all[i][1][1]],
+                                "id_end": mapping_dict[answers_all[i][1][2]],
                                 "score": answers_all[i][1][3],
                             },
                             #answers_all[i][1],
                             "Where" : {
                                 "answer": answers_all[i][2][0],
-                                "id_start": answers_all[i][2][1],
-                                "id_end": answers_all[i][2][2],
+                                "id_start": mapping_dict[answers_all[i][2][1]],
+                                "id_end": mapping_dict[answers_all[i][2][2]],
                                 "score": answers_all[i][2][3],
                             },
                             #answers_all[i][2]
