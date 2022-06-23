@@ -22,29 +22,11 @@ background-color: blue;
     /* ouvrir une fenêtre à part, en passant la fenêtre en visible ? */
 }
 
-#event_page .tooltip {
+#event_page .event {
   display: inline;
   border-bottom: 1px dotted black;
   /* color of the span text */
   color: rgb(119, 162, 241);
-}
-
-#event_page .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  /* color of the tooltip text */
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: fixed;
-  z-index: 1;
-    border: 5px double #b4b8bf;
-}
-
-#event_page .tooltip:hover .tooltiptext {
-  visibility: visible;
 }
 
 #event_page .absolute {

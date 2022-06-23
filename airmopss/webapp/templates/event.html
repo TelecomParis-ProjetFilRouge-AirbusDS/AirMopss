@@ -16,9 +16,8 @@
 
         {{ article[ns.current_index:next_event[0]].replace("\n", "\n<br/>")|safe }}
 
-        <strong class="tooltip" data-event="{{ next_event[2] }}">
+        <strong class="event" data-event="{{ next_event[2] }}">
           {{ article[next_event[0]:next_event[1]].replace("\n", "\n<br/>")|safe }}
-          <span class="tooltiptext">{{ next_event[2] }}</span>
         </strong>
 
         {% set ns.current_index = next_event[1] %}

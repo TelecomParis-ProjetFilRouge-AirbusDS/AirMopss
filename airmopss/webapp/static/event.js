@@ -15,6 +15,6 @@ $(function() {
         $('#where').text(where);
         $('#when').text(when);
     }
-    $(".tooltip").click(maFonction);
+    $(".event").click(maFonction);
 });
 
