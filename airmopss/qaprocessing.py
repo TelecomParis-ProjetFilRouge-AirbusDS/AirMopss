@@ -128,6 +128,8 @@ class QaProcessing():
 
         # mapping between the indices of the raw article and the cleaned article
         mapping_dict = self.data_loader.get_aligned_indices(input_txt, text_clean)
+        #mapping_dict = self.data_loader.get_aligned_indices(input_txt, "\n".join(paragraphs))
+
         
         gn_subj_all = []
         gn_subj_idx_all = []
@@ -159,11 +161,14 @@ class QaProcessing():
 
                     result = self.qa_pipeline(question=question, context=paragraph)
                     answer = result['answer']
-                    id_start = result['start']
-                    id_end = result['end']
+                    id_start = result['start'] + paragraph_len
+                    id_end = result['end'] + paragraph_len
                     score = result['score']
+                    self.logger.info(input_txt[id_start:id_end])
+                    self.logger.info(text_clean[id_start:id_end])
 
-                    self.logger.info(f"Result is {result}\nAnswer to question {question} : \n {answer}\nScore: {score}\n------------------------------------------")
+
+                    #self.logger.info(f"Result is {result}\nAnswer to question {question} : \n {answer}\nScore: {score}\n------------------------------------------")
                     answers_gn.append([answer, id_start, id_end, score])
 
                     if score > scores[qu]:
@@ -171,7 +176,6 @@ class QaProcessing():
                         scores[qu] = score
 
                 answers_all.append(answers_gn)
-
 
             ## Update the character count variable
             paragraph_len += len(paragraph)+1

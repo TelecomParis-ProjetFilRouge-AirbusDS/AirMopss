@@ -43,12 +43,12 @@ def new_article():
     article = request.form['article']
 
     # TODO: article includes \r after \n. Should they be removed ?
-    app.logger.warning(repr(article))
+    #app.logger.warning(repr(article))
 
     events = qa_processor.get_events(article)
 
     events_list = [(event["start_idx"], event["end_idx"], json.dumps(event["details"])) for event in events["events"]]
-    app.logger.info(events_list)
+    #app.logger.info(events_list)
 
     return render_template('article.html', article=article, article_len=len(article), events=events, events_list=events_list)
 
