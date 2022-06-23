@@ -12,6 +12,9 @@
   /* padding: 20px;*/
   padding: 1%;
   line-height: 2.5em;
+
+  max-height: 100em;
+  overflow: scroll;
 }
 
 #event_page mark {
