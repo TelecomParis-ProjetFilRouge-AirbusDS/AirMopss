@@ -3,7 +3,7 @@ $(function() {
 
     function maFonction() {
         var event = $(this).data('event');
-        event = JSON.parse(event.replace(/'/g, '"'));
+        console.log(event);
 
         who = event.Who;
         what = event.What.answer;
