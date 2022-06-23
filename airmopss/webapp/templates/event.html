@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div id="event_page" >
+    <h1>Event Extractions</h1>
+
+    <div>
+      Nombre d'événements : {{ events_list|length }}
+    </div>
+    <div class="article" >
+      {% set ns = namespace(current_index=0) %}
+      {% set iterations_nb = events_list|length %}
+      {% for i in range(iterations_nb) %}
+        
+        {% set next_event = events_list.pop(0) %}
+
+        {{ article[ns.current_index:next_event[0]].replace("\n", "\n<br/>")|safe }}
+
+        <strong class="tooltip" data-event="{{ next_event[2] }}">
+          {{ article[next_event[0]:next_event[1]].replace("\n", "\n<br/>")|safe }}
+          <span class="tooltiptext">{{ next_event[2] }}</span>
+        </strong>
+
+        {% set ns.current_index = next_event[1] %}
+      {% endfor %}
+
+      {{ article[ns.current_index:article_len].replace("\n", "\n<br/>")|safe }}
+
+    </div>
+    <div id="event-container" class="absolute">
+      Who: <div id='who'> </div>
+      What: <div id='what'> </div>
+      Where: <div id='where'> </div>
+      When: <div id='when'> </div>
+    </div>
+  </div>
+{% endblock %}

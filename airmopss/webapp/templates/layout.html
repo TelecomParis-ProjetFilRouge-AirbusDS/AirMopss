@@ -2,9 +2,9 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='event.css') }}">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='latest_article.js', version='1234') }}"></script>
+    <script src="{{ url_for('static', filename='event.js', version='1234') }}"></script>
   </head>
   <body>
     {% block body %} {% endblock %}

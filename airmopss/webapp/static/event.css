@@ -1,0 +1,57 @@
+#event_page div.article {
+  font-family: georgia;
+  /*text-align: center;*/
+  /*font-style: italic;*/
+
+  box-sizing: content-box;
+  max-width: 75%;
+  margin-top: 2em;
+  border:1px solid black;
+  word-wrap: break-word;
+  white-space: normal;
+  /* padding: 20px;*/
+  padding: 1%;
+}
+
+#event_page strong {
+background-color: blue;
+
+}
+#event_page strong:hover {
+    background-color: red;
+    /* ouvrir une fenêtre à part, en passant la fenêtre en visible ? */
+}
+
+#event_page .tooltip {
+  display: inline;
+  border-bottom: 1px dotted black;
+  /* color of the span text */
+  color: rgb(119, 162, 241);
+}
+
+#event_page .tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  /* color of the tooltip text */
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: fixed;
+  z-index: 1;
+    border: 5px double #b4b8bf;
+}
+
+#event_page .tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#event_page .absolute {
+  position: absolute;
+  top: 8.5em;
+  left: 79%;
+  width: 20%;
+  border: 1px solid blue;
+}
+
