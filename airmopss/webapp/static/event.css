@@ -1,4 +1,22 @@
-#event_page .article {
+body {
+  background-color: rgb(255, 255, 255);
+    }
+
+header {
+  text-align: center;
+  border: None;
+  background-image: url("Logo_telecom.png"),url("Logo_airbus.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: left, right;
+  background-color: white, white;
+  background-size: contain, contain;
+  height : 100px;
+  width : 100%
+  }
+
+
+  
+  #event_page .article {
   font-family: verdana;
   /*text-align: center;*/
   /*font-style: italic;*/
