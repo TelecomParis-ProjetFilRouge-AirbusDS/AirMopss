@@ -47,18 +47,17 @@ class QaProcessing():
         """
         questions = [
             "What happened to _GN_?",
-            #"What happens to _GN_?",
-
-            #"What did _GN_ do?",
-            #"What do _GN_ do?",
+            "What happens to _GN_?",
+            "What did _GN_ do?",
+            "What do _GN_ do?",
 
             "When did _GN_ _action_?",
-            #"When do _GN_ _action_?",
-            # "When did _action_ happen?",
+            "When do _GN_ _action_?",
+            "When did _action_ happen?",
 
             "Where did _GN_ _action_?",
-           # "Where do _GN_ _action_?",
-            # "Where did _action_ take place?"
+            "Where do _GN_ _action_?",
+            "Where did _action_ take place?"
         ]
         return questions
 
@@ -149,6 +148,8 @@ class QaProcessing():
                 scores = {'what': 5e-3, 'who': 5e-3, 'when': 5e-2, 'where': 5e-2}
                 # preds = {'what':None, 'who':None, 'when':None, 'where':None}
                 preds = {'what': "XXX", 'who': GN, 'when': "XXX", 'where': "XXX"}
+                id_start = {'what': 0, 'who': gn_subj_idx[0][0], 'when': 0, 'where': 0}
+                id_end = {'what': 0, 'who': gn_subj_idx[0][1], 'when': 0, 'where': 0}
 
                 answers_gn = []
 
@@ -160,22 +161,22 @@ class QaProcessing():
                         question = question.replace("_action_", preds['what'])
 
                     result = self.qa_pipeline(question=question, context=paragraph)
-                    answer = result['answer']
-                    id_start = result['start'] + paragraph_len
-                    id_end = result['end'] + paragraph_len
                     score = result['score']
-                    self.logger.info(input_txt[id_start:id_end])
-                    self.logger.info(text_clean[id_start:id_end])
-
 
                     #self.logger.info(f"Result is {result}\nAnswer to question {question} : \n {answer}\nScore: {score}\n------------------------------------------")
-                    answers_gn.append([answer, id_start, id_end, score])
+                    #answers_gn.append([answer, id_start, id_end, score])
 
                     if score > scores[qu]:
-                        preds[qu] = answer
+                        preds[qu] = result['answer']
                         scores[qu] = score
+                        id_start[qu] = result['start'] + paragraph_len
+                        id_end[qu] = result['end'] + paragraph_len
 
+                answers_gn = [[preds[qu], id_start[qu], id_end[qu], scores[qu] ] for qu in ['what', 'when','where']]
                 answers_all.append(answers_gn)
+                
+                self.logger.info(answers_gn)
+                #self.logger.info(answers_all)
 
             ## Update the character count variable
             paragraph_len += len(paragraph)+1
@@ -271,15 +272,15 @@ class QaProcessing():
                         if score > scores[qu]:
                             preds[qu] = answer
                             scores[qu] = score
-                        else:
-                            print("Score too low")
+                        #else:
+                        #    print("Score too low")
 
-                        print(question, ' : ', answer, ' score : ', score)
+                        #print(question, ' : ', answer, ' score : ', score)
 
                     answers_all += answers_gn
 
                     # display([ key + ": " + preds[key] + " (" + str(scores[key]) + ")"  for key in preds.keys()])
-                    print('\n')
+                    #print('\n')
 
                 ## Update the character count variable
                 paragraph_len += len(paragraph)
