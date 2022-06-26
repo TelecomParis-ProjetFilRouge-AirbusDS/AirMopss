@@ -125,6 +125,18 @@ class QaProcessing():
         # split in paragraphs
         paragraphs = split_paragraphs(text_clean)
 
+        return self.extract_events(input_txt, text_clean, paragraphs)
+
+    def get_events_by_article(self, id_article):
+
+        article = self.data_loader.get_data_content_full(id_article)
+        text_clean = self.data_loader.get_data_content_clean(id_article)
+        # TODO  : chekc split in paragraph consistency
+        paragraphs = self.data_loader.get_data_content_paragraphs(id_article)
+
+        return self.extract_events(article, text_clean, paragraphs)
+
+    def extract_events(self, input_txt, text_clean, paragraphs):
         # mapping between the indices of the raw article and the cleaned article
         mapping_dict = self.data_loader.get_aligned_indices(input_txt, text_clean)
         #mapping_dict = self.data_loader.get_aligned_indices(input_txt, "\n".join(paragraphs))
@@ -213,7 +225,25 @@ class QaProcessing():
                     } for i in range(len(gn_subj_all)) ]}
 
         return events
-    
+
+    def process_and_store(self):
+        newsdata_events = {}
+        #for id_article in self.data_loader.data.keys():
+        for id_article in [0, 1, 101]:
+
+            self.logger.info(id_article)
+            # for id_article in [1]:
+            article = self.data_loader.get_data_content_full(id_article)
+
+            text_clean = self.data_loader.get_data_content_clean(id_article)
+            # TODO  : check split in paragraph consistency
+            paragraphs = self.data_loader.get_data_content_paragraphs(id_article)
+
+            events = self.extract_events(article, text_clean, paragraphs)
+            newsdata_events[id_article] = events
+
+        self.data_loader.save_data_articles_pkl(newsdata_events, filename="newsdata_events.pkl")
+
 
     def process(self):
         """

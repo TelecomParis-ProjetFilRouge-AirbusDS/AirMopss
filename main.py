@@ -16,7 +16,7 @@ def main(config):
 
     # process
     data_processor = DataProcessing(config, data_loader)
-    data_processor.run(task="qa")
+    data_processor.run(task=config.task)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="How to launch airmopss")

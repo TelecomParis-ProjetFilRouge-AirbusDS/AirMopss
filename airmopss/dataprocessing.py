@@ -39,8 +39,8 @@ class DataProcessing():
         else:
             self.pipeline = data_loader.pipeline
 
-        if "qa" == config.task:
-            self.qa = QaProcessing(config, data_loader)
+        #if "qa" == config.task:
+        self.qa = QaProcessing(config, data_loader)
 
     def run(self, task="extract_np"):
         """
@@ -55,6 +55,9 @@ class DataProcessing():
 
         elif task == "qa":
             self.qa.process()
+
+        elif task == "generate_pickle":
+            self.qa.process_and_store()
 
         elif task == "version":
             print("Versions:")
