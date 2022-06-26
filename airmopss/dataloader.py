@@ -312,7 +312,7 @@ class DataLoader():
         :param idx: id of the article
         :return:
         """
-        return self.data[idx]["content_clean"]
+        return self.data[idx]["content_clean"][1]
 
     def get_data_content_paragraphs(self, idx):
 
