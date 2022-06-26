@@ -30,7 +30,6 @@ class QaProcessing():
 
         self.data_loader = data_loader
         self.config = config
-
         # TODO : to remove before delivery
         if config.debug_mini_load:
             pass
@@ -187,12 +186,11 @@ class QaProcessing():
                 answers_gn = [[preds[qu], id_start[qu], id_end[qu], scores[qu] ] for qu in ['what', 'when','where']]
                 answers_all.append(answers_gn)
                 
-                self.logger.info(answers_gn)
+                #self.logger.debug(answers_gn)
                 #self.logger.info(answers_all)
 
             ## Update the character count variable
             paragraph_len += len(paragraph)+1
-        
 
         events = { "events" :
                        [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
@@ -246,14 +244,14 @@ class QaProcessing():
 
         :return:
         """
-        #articles = self.data[2]
+        # articles = self.data[2]
         # TODO : to extend or fix depending on desired process
         for idx in [101]:
 
-            #clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
-            #clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
-            
-            ## If launched from terminal 
+            # clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
+            # clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
+
+            ## If launched from terminal
             article = self.data_loader.get_data_content_full(idx)
             paragraphs = self.data_loader.get_data_content_paragraphs(idx)
 
