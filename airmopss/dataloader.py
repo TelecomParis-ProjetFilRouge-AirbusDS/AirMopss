@@ -133,7 +133,7 @@ class DataLoader():
         data = pickle.load(open(filename, "rb"))
         return data
 
-    def save_data_articles_pkl(self, data, filename):
+    def save_data_articles_pkl(self, data, filename="dummy.plk"):
         """
         Saves preprocessed data from a pickle file
 

@@ -29,6 +29,7 @@ class QaProcessing():
         self.logger.info(f"Building {__class__.__name__} instance")
 
         self.data_loader = data_loader
+        self.config = config
 
         # TODO : to remove before delivery
         if config.debug_mini_load:
@@ -141,7 +142,6 @@ class QaProcessing():
         mapping_dict = self.data_loader.get_aligned_indices(input_txt, text_clean)
         #mapping_dict = self.data_loader.get_aligned_indices(input_txt, "\n".join(paragraphs))
 
-        
         gn_subj_all = []
         gn_subj_idx_all = []
         answers_all = []
@@ -242,7 +242,7 @@ class QaProcessing():
             events = self.extract_events(article, text_clean, paragraphs)
             newsdata_events[id_article] = events
 
-        self.data_loader.save_data_articles_pkl(newsdata_events, filename="newsdata_events.pkl")
+        self.data_loader.save_data_articles_pkl(newsdata_events, filename=self.config.pkl_file)
 
 
     def process(self):

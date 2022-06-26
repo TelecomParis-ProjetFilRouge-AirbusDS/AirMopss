@@ -5,6 +5,7 @@ import pandas as pd
 import argparse
 config = argparse.Namespace()
 config.csv_file = "tests/data/test_dataloader.csv"
+config.pkl_file='test/data/newsdata_events.pkl'
 config.split = "article"
 config.labelled_only = "False"
 config.labels_file = "tests/data/newsdata_labels.txt"

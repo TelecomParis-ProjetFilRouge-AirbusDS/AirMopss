@@ -20,6 +20,7 @@ app.secret_key = "SekretKi"
 # TODO : to fix as it, duplicates argarse from main.py
 config = argparse.Namespace()
 config.csv_file='airmopss/data/newsdata.csv'
+config.pkl_file='airmopss/data/newsdata_events.pkl'
 config.labels_file='airmopss/data/newsdata_labels.txt'
 config.spacy_pipeline='en_core_web_sm'
 config.task='qa'
