@@ -1,11 +1,24 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <h1>Event Extractions (integration)</h1>
+  <h3>Extraction from a news article text</h3>
 
   <form action="/events" method="post">
+    <input name="data_origin" type="hidden" value="form">
     <div class="button"><input type=submit value="Submit"></div>
     <textarea type=text name="article" placeholder="Copy paste the content here" rows="30" cols="150"></textarea>
-    <div class="button"><input type=submit value="Submit"></div>
   </form>
+
+  <h3>Choose an article from the dataset : </h3>
+  <form action="/events" method="post">
+    <input name="data_origin" type="hidden" value="dataset">
+    <input list="articles_dataset" name="article_id">
+    <datalist id="articles_dataset">
+    {% for i in range(article_nb) %}
+      <option value={{ article_ids[i] }}>{{ article_titles[i] }}</option>
+    {% endfor %}
+    </datalist>
+    <input type="submit">
+  </form>
+
 {% endblock %}

@@ -7,6 +7,7 @@ Handles the DataLoader class
 import pandas as pd
 import spacy
 import json
+import pickle
 from .utils import needleman_wunsch
 from .preprocessing import *
 import re
@@ -122,6 +123,26 @@ class DataLoader():
 
         return d
 
+    def load_data_articles_pkl(self, filename):
+        """
+        Loads preprocessed data from a pickle file
+
+        :param filename:
+        :return:
+        """
+        data = pickle.load(open(filename, "rb"))
+        return data
+
+    def save_data_articles_pkl(self, data, filename="dummy.plk"):
+        """
+        Saves preprocessed data from a pickle file
+
+        :param filename:
+        :return:
+        """
+        pickle.dump(data, open(filename, "wb"))
+
+        return
 
 
     def get_aligned_indices(self, text_original, text_clean):
@@ -291,7 +312,7 @@ class DataLoader():
         :param idx: id of the article
         :return:
         """
-        return self.data[idx]["content_clean"]
+        return self.data[idx]["content_clean"][1]
 
     def get_data_content_paragraphs(self, idx):
 

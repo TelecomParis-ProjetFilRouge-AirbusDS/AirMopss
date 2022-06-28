@@ -29,7 +29,7 @@ class QaProcessing():
         self.logger.info(f"Building {__class__.__name__} instance")
 
         self.data_loader = data_loader
-
+        self.config = config
         # TODO : to remove before delivery
         if config.debug_mini_load:
             pass
@@ -47,18 +47,17 @@ class QaProcessing():
         """
         questions = [
             "What happened to _GN_?",
-            #"What happens to _GN_?",
-
-            #"What did _GN_ do?",
-            #"What do _GN_ do?",
+            "What happens to _GN_?",
+            "What did _GN_ do?",
+            "What do _GN_ do?",
 
             "When did _GN_ _action_?",
-            #"When do _GN_ _action_?",
-            # "When did _action_ happen?",
+            "When do _GN_ _action_?",
+            "When did _action_ happen?",
 
             "Where did _GN_ _action_?",
-           # "Where do _GN_ _action_?",
-            # "Where did _action_ take place?"
+            "Where do _GN_ _action_?",
+            "Where did _action_ take place?"
         ]
         return questions
 
@@ -126,11 +125,22 @@ class QaProcessing():
         # split in paragraphs
         paragraphs = split_paragraphs(text_clean)
 
+        return self.extract_events(input_txt, text_clean, paragraphs)
+
+    def get_events_by_article(self, id_article):
+
+        article = self.data_loader.get_data_content_full(id_article)
+        text_clean = self.data_loader.get_data_content_clean(id_article)
+        # TODO  : chekc split in paragraph consistency
+        paragraphs = self.data_loader.get_data_content_paragraphs(id_article)
+
+        return self.extract_events(article, text_clean, paragraphs)
+
+    def extract_events(self, input_txt, text_clean, paragraphs):
         # mapping between the indices of the raw article and the cleaned article
         mapping_dict = self.data_loader.get_aligned_indices(input_txt, text_clean)
         #mapping_dict = self.data_loader.get_aligned_indices(input_txt, "\n".join(paragraphs))
 
-        
         gn_subj_all = []
         gn_subj_idx_all = []
         answers_all = []
@@ -149,6 +159,8 @@ class QaProcessing():
                 scores = {'what': 5e-3, 'who': 5e-3, 'when': 5e-2, 'where': 5e-2}
                 # preds = {'what':None, 'who':None, 'when':None, 'where':None}
                 preds = {'what': "XXX", 'who': GN, 'when': "XXX", 'where': "XXX"}
+                id_start = {'what': 0, 'who': gn_subj_idx[0][0], 'when': 0, 'where': 0}
+                id_end = {'what': 0, 'who': gn_subj_idx[0][1], 'when': 0, 'where': 0}
 
                 answers_gn = []
 
@@ -160,73 +172,99 @@ class QaProcessing():
                         question = question.replace("_action_", preds['what'])
 
                     result = self.qa_pipeline(question=question, context=paragraph)
-                    answer = result['answer']
-                    id_start = result['start'] + paragraph_len
-                    id_end = result['end'] + paragraph_len
                     score = result['score']
-                    self.logger.info(input_txt[id_start:id_end])
-                    self.logger.info(text_clean[id_start:id_end])
-
 
                     #self.logger.info(f"Result is {result}\nAnswer to question {question} : \n {answer}\nScore: {score}\n------------------------------------------")
-                    answers_gn.append([answer, id_start, id_end, score])
+                    #answers_gn.append([answer, id_start, id_end, score])
 
                     if score > scores[qu]:
-                        preds[qu] = answer
+                        preds[qu] = result['answer']
                         scores[qu] = score
+                        id_start[qu] = result['start'] + paragraph_len
+                        id_end[qu] = result['end'] + paragraph_len
 
+                answers_gn = [[preds[qu], id_start[qu], id_end[qu], scores[qu] ] for qu in ['what', 'when','where']]
                 answers_all.append(answers_gn)
+                
+                #self.logger.debug(answers_gn)
+                #self.logger.info(answers_all)
 
             ## Update the character count variable
             paragraph_len += len(paragraph)+1
-        
 
-        events = { "events" :
-                       [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
-                        "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
-                        "details" : {
-                            # "Who" : [ gn_subj_all[i], idx_start, id_end],
-                            "Who" : gn_subj_all[i],
-                            "What" : {
-                                "answer": answers_all[i][0][0],
-                                "id_start": mapping_dict[answers_all[i][0][1]],
-                                "id_end": mapping_dict[answers_all[i][0][2]],
-                                "score": answers_all[i][0][3],
-                            },
-                            # answers_all[i][0]
-                            "When" : {
-                                "answer": answers_all[i][1][0],
-                                "id_start": mapping_dict[answers_all[i][1][1]],
-                                "id_end": mapping_dict[answers_all[i][1][2]],
-                                "score": answers_all[i][1][3],
-                            },
-                            #answers_all[i][1],
-                            "Where" : {
-                                "answer": answers_all[i][2][0],
-                                "id_start": mapping_dict[answers_all[i][2][1]],
-                                "id_end": mapping_dict[answers_all[i][2][2]],
-                                "score": answers_all[i][2][3],
-                            },
-                            #answers_all[i][2]
-                            }
-                    } for i in range(len(gn_subj_all)) ]}
+        try:
+            events = { "events" :
+                           [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
+                            "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
+                            "details" : {
+                                # "Who" : [ gn_subj_all[i], idx_start, id_end],
+                                "Who" : gn_subj_all[i],
+                                "What" : {
+                                    "answer": answers_all[i][0][0],
+                                    "id_start": mapping_dict[answers_all[i][0][1]],
+                                    "id_end": mapping_dict[answers_all[i][0][2]],
+                                    "score": answers_all[i][0][3],
+                                },
+                                # answers_all[i][0]
+                                "When" : {
+                                    "answer": answers_all[i][1][0],
+                                    "id_start": mapping_dict[answers_all[i][1][1]],
+                                    "id_end": mapping_dict[answers_all[i][1][2]],
+                                    "score": answers_all[i][1][3],
+                                },
+                                #answers_all[i][1],
+                                "Where" : {
+                                    "answer": answers_all[i][2][0],
+                                    "id_start": mapping_dict[answers_all[i][2][1]],
+                                    "id_end": mapping_dict[answers_all[i][2][2]],
+                                    "score": answers_all[i][2][3],
+                                },
+                                #answers_all[i][2]
+                                }
+                        } for i in range(len(gn_subj_all)) ]}
+        except KeyError as e:
+            self.logger.error(f"Exception caught {e}")
+            events = None
+
 
         return events
-    
+
+    def process_and_store(self):
+        newsdata_events = {}
+        for id_article in self.data_loader.data.keys():
+        #for id_article in [0, 1, 101]:
+            article = self.data_loader.get_data_content_full(id_article)
+            size = len(article)
+            if size > 5000:
+                self.logger.info(f"Discarding article {id_article} (size: {size})")
+                continue
+            self.logger.info(f"Processing article {id_article} (size: {size})")
+            text_clean = self.data_loader.get_data_content_clean(id_article)
+            # TODO  : check split in paragraph consistency
+            paragraphs = self.data_loader.get_data_content_paragraphs(id_article)
+
+            events = self.extract_events(article, text_clean, paragraphs)
+            if events == None:
+                self.logger.info(f"CANCELLED article {id_article} ")
+                continue
+            newsdata_events[id_article] = events
+
+            self.data_loader.save_data_articles_pkl(newsdata_events, filename=self.config.pkl_file)
+            self.logger.info(f"DONE {id_article} ")
 
     def process(self):
         """
 
         :return:
         """
-        #articles = self.data[2]
+        # articles = self.data[2]
         # TODO : to extend or fix depending on desired process
         for idx in [101]:
 
-            #clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
-            #clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
-            
-            ## If launched from terminal 
+            # clean_article_regex = re.sub("\n\S+\n\n+", "\n", articles[idx])
+            # clean_article_regex = re.sub("\n+", "\n", clean_article_regex)
+
+            ## If launched from terminal
             article = self.data_loader.get_data_content_full(idx)
             paragraphs = self.data_loader.get_data_content_paragraphs(idx)
 
@@ -271,15 +309,15 @@ class QaProcessing():
                         if score > scores[qu]:
                             preds[qu] = answer
                             scores[qu] = score
-                        else:
-                            print("Score too low")
+                        #else:
+                        #    print("Score too low")
 
-                        print(question, ' : ', answer, ' score : ', score)
+                        #print(question, ' : ', answer, ' score : ', score)
 
                     answers_all += answers_gn
 
                     # display([ key + ": " + preds[key] + " (" + str(scores[key]) + ")"  for key in preds.keys()])
-                    print('\n')
+                    #print('\n')
 
                 ## Update the character count variable
                 paragraph_len += len(paragraph)
