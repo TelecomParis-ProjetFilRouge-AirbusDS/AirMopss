@@ -63,6 +63,7 @@ def events():
 
     else:
         article = request.form['article']
+        # TODO handle the case where events is None
         events = qa_processor.get_events(article)
         events_list = [(event["start_idx"], event["end_idx"], json.dumps(event["details"])) for event in events["events"]]
 

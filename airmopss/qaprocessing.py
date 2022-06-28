@@ -192,35 +192,40 @@ class QaProcessing():
             ## Update the character count variable
             paragraph_len += len(paragraph)+1
 
-        events = { "events" :
-                       [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
-                        "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
-                        "details" : {
-                            # "Who" : [ gn_subj_all[i], idx_start, id_end],
-                            "Who" : gn_subj_all[i],
-                            "What" : {
-                                "answer": answers_all[i][0][0],
-                                "id_start": mapping_dict[answers_all[i][0][1]],
-                                "id_end": mapping_dict[answers_all[i][0][2]],
-                                "score": answers_all[i][0][3],
-                            },
-                            # answers_all[i][0]
-                            "When" : {
-                                "answer": answers_all[i][1][0],
-                                "id_start": mapping_dict[answers_all[i][1][1]],
-                                "id_end": mapping_dict[answers_all[i][1][2]],
-                                "score": answers_all[i][1][3],
-                            },
-                            #answers_all[i][1],
-                            "Where" : {
-                                "answer": answers_all[i][2][0],
-                                "id_start": mapping_dict[answers_all[i][2][1]],
-                                "id_end": mapping_dict[answers_all[i][2][2]],
-                                "score": answers_all[i][2][3],
-                            },
-                            #answers_all[i][2]
-                            }
-                    } for i in range(len(gn_subj_all)) ]}
+        try:
+            events = { "events" :
+                           [{ "start_idx": mapping_dict[gn_subj_idx_all[i][0]],
+                            "end_idx" : mapping_dict[gn_subj_idx_all[i][1]],
+                            "details" : {
+                                # "Who" : [ gn_subj_all[i], idx_start, id_end],
+                                "Who" : gn_subj_all[i],
+                                "What" : {
+                                    "answer": answers_all[i][0][0],
+                                    "id_start": mapping_dict[answers_all[i][0][1]],
+                                    "id_end": mapping_dict[answers_all[i][0][2]],
+                                    "score": answers_all[i][0][3],
+                                },
+                                # answers_all[i][0]
+                                "When" : {
+                                    "answer": answers_all[i][1][0],
+                                    "id_start": mapping_dict[answers_all[i][1][1]],
+                                    "id_end": mapping_dict[answers_all[i][1][2]],
+                                    "score": answers_all[i][1][3],
+                                },
+                                #answers_all[i][1],
+                                "Where" : {
+                                    "answer": answers_all[i][2][0],
+                                    "id_start": mapping_dict[answers_all[i][2][1]],
+                                    "id_end": mapping_dict[answers_all[i][2][2]],
+                                    "score": answers_all[i][2][3],
+                                },
+                                #answers_all[i][2]
+                                }
+                        } for i in range(len(gn_subj_all)) ]}
+        except KeyError as e:
+            self.logger.error(f"Exception caught {e}")
+            events = None
+
 
         return events
 
@@ -228,16 +233,24 @@ class QaProcessing():
         newsdata_events = {}
         for id_article in self.data_loader.data.keys():
         #for id_article in [0, 1, 101]:
-            self.logger.info(f"Processing article {id_article}")
             article = self.data_loader.get_data_content_full(id_article)
-
+            size = len(article)
+            if size > 5000:
+                self.logger.info(f"Discarding article {id_article} (size: {size})")
+                continue
+            self.logger.info(f"Processing article {id_article} (size: {size})")
             text_clean = self.data_loader.get_data_content_clean(id_article)
             # TODO  : check split in paragraph consistency
             paragraphs = self.data_loader.get_data_content_paragraphs(id_article)
 
             events = self.extract_events(article, text_clean, paragraphs)
+            if events == None:
+                self.logger.info(f"CANCELLED article {id_article} ")
+                continue
             newsdata_events[id_article] = events
+
             self.data_loader.save_data_articles_pkl(newsdata_events, filename=self.config.pkl_file)
+            self.logger.info(f"DONE {id_article} ")
 
     def process(self):
         """
