@@ -38,13 +38,7 @@ class DataLoader():
         self.config = config
         self.data = self.load_data(config.csv_file)
 
-
-        # TODO : to remove before delivery
-        if config.debug_mini_load:
-            pass
-        else:
-            # en_core_web_sm ou autre
-            self.pipeline = self.get_pipeline(config.spacy_pipeline)
+        self.pipeline = self.get_pipeline(config.spacy_pipeline)
 
         self.sequences = []
 

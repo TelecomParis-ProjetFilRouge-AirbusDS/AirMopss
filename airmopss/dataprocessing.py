@@ -92,6 +92,7 @@ class DataProcessing():
 
         return elements_list
 
+
     def _extract_np(self):
         """
 
@@ -120,10 +121,6 @@ class DataProcessing():
 
             print("\n#### DOBJ ####\n")
             dobjs = self.get_elements(doc, dep='dobj')
-
-            # print(ents[0].ent_iob_) # renvoie O, I, ou B (outside, inside, beginning)
-            # displacy.serve(doc, host="localhost", port=5000, style='ent')  # visualisation de la NER
-            # displacy.serve(doc, host="localhost", port=5001, style='dep')  # visualisation de la NER
 
 
     def score_func(self, gt, pred):

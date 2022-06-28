@@ -6,7 +6,6 @@ The module declares preprocessing utility functions
 
 import re
 
-
 def get_stop_sentences():
     """
     Returns a list of sentences that should be excluded from source
