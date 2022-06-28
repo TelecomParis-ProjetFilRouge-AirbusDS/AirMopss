@@ -35,7 +35,7 @@ data_processor = DataProcessing(config, data_loader, logger=app.logger)
 qa_processor = QaProcessing(config, data_loader, logger=app.logger)
 
 # TODO: Use filepath from config
-article_events = data_loader.load_data_articles_pkl('newsdata_events.pkl')
+article_events = data_loader.load_data_articles_pkl(config.pkl_file)
 
 @app.route('/', methods=['GET'])
 def index():
