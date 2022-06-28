@@ -331,13 +331,6 @@ class DataLoader():
         """
         return self.data[idx]["content_full_splitted"]
 
-    def get_seq(self, id_start, id_end, id_article=0, field='content_y' ):
-        t = self.data[id_article][field]
-        if id_start < id_end < len(t):
-            return t[id_start:id_end]
-        else:
-            return t
-
     def load_data_preprocess(self, title, description, content_x, content_y):
         """
         Preprocess the content of an article based on specific csv file fields

@@ -118,19 +118,17 @@ class DataProcessing():
             print("\n#### DOBJ ####\n")
             dobjs = self.get_elements(doc, dep='dobj')
 
-
-    def score_func(self, gt, pred):
+    def score_func(self, ground_truth, prediction):
         """
-        Computes the F1 score
+        Computes the F1 score between two sets of words from ground truth and prediction
 
-        # TODO what are gt and pred, rename variables
-        :param gt:
-        :param pred:
+        :param ground_truth: set of reference words
+        :param prediction: set of predicted words
         :return: the computed F1 score
         """
-        TP = len(gt.intersection(pred))
-        FN = len(gt - pred)
-        FP = len(pred - gt)
+        TP = len(ground_truth.intersection(prediction))
+        FN = len(ground_truth - prediction)
+        FP = len(prediction - ground_truth)
 
         # Calcul du score F1
         if (TP+FP)*(TP+FN)*TP != 0:

@@ -10,7 +10,7 @@ from ..dataprocessing import DataProcessing
 from ..qaprocessing import QaProcessing
 import logging
 
-logging.info(f"Building Flass app...")
+logging.info(f"Building Flask app...")
 app = Flask(__name__)
 
 app.secret_key = "SekretKi"
@@ -29,12 +29,12 @@ data_loader = DataLoader(config, logger=app.logger)
 data_processor = DataProcessing(config, data_loader, logger=app.logger)
 qa_processor = QaProcessing(config, data_loader, logger=app.logger)
 
-# TODO: Use filepath from config
 article_events = data_loader.load_data_articles_pkl(config.pkl_file)
 
 @app.route('/', methods=['GET'])
 def index():
     """
+    Renders the main page. Displays a dropdown list of dataset articles and a textarea to process any text.
 
     :return:
     """
@@ -52,6 +52,7 @@ def index():
 @app.route('/events', methods=['POST'])
 def events():
     """
+    Renders the page which displays extracted events and the validation buttons.
 
     :return:
     """
@@ -71,4 +72,3 @@ def events():
         events_list = [(event["start_idx"], event["end_idx"], json.dumps(event["details"])) for event in events["events"]]
 
         return render_template('event.html', article=article, article_len=len(article), events=events, events_list=events_list)
-

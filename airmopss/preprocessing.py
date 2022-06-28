@@ -161,11 +161,3 @@ def split_paragraphs(txt):
     ## useless ? 
     # paragraphs = [paragraph for paragraph in paragraphs]
     return paragraphs
-
-
-if __name__ == '__main__':
-    s = "test\n\ntsdqfd gshsh st hsrh rshvc rshs r h f e s  t\n\nGetty images c b n j k lm u y fdsqdfqsdq\n\nHacked Gitty imiges c b n j k lm u y fdsqdfqsdq\n" + "Share on Twitter\n"
-
-    print("\n### s : \n", s)
-    print("\n### clean : \n", clean_text(s))
-    print("\n### paragraphs: \n", split_paragraphs(clean_text(s)))
