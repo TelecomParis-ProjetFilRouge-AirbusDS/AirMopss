@@ -33,11 +33,7 @@ class DataProcessing():
         self.data = data_loader.data
         self.data_loader = data_loader
 
-        # TODO : to remove before delivery
-        if config.debug_mini_load:
-            pass
-        else:
-            self.pipeline = data_loader.pipeline
+        self.pipeline = data_loader.pipeline
 
         #if "qa" == config.task:
         self.qa = QaProcessing(config, data_loader)
