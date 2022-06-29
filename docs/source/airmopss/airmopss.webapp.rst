@@ -12,14 +12,6 @@ airmopss.webapp.webapp module
    :undoc-members:
    :show-inheritance:
 
-airmopss.webapp.webapp\_getpage module
---------------------------------------
-
-.. automodule:: airmopss.webapp.webapp_getpage
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 airmopss.webapp.webapp\_tests module
 ------------------------------------
 

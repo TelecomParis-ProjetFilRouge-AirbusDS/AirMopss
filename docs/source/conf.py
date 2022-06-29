@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'AirMopss'
-copyright = '2022, A. Majait, S. Oumama, LG. Pouillot, G. Sanchez, CE. Simon'
-author = 'A. Majait, S. Oumama, LG. Pouillot, G. Sanchez, CE. Simon'
+copyright = '2022, A. Mejait, S. Oumama, LG. Pouillot, G. Sanchez, CE. Simon'
+author = 'A. Mejait, S. Oumama, LG. Pouillot, G. Sanchez, CE. Simon'
 
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'
