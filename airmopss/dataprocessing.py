@@ -33,11 +33,7 @@ class DataProcessing():
         self.data = data_loader.data
         self.data_loader = data_loader
 
-        # TODO : to remove before delivery
-        if config.debug_mini_load:
-            pass
-        else:
-            self.pipeline = data_loader.pipeline
+        self.pipeline = data_loader.pipeline
 
         #if "qa" == config.task:
         self.qa = QaProcessing(config, data_loader)
@@ -92,6 +88,7 @@ class DataProcessing():
 
         return elements_list
 
+
     def _extract_np(self):
         """
 
@@ -121,23 +118,17 @@ class DataProcessing():
             print("\n#### DOBJ ####\n")
             dobjs = self.get_elements(doc, dep='dobj')
 
-            # print(ents[0].ent_iob_) # renvoie O, I, ou B (outside, inside, beginning)
-            # displacy.serve(doc, host="localhost", port=5000, style='ent')  # visualisation de la NER
-            # displacy.serve(doc, host="localhost", port=5001, style='dep')  # visualisation de la NER
-
-
-    def score_func(self, gt, pred):
+    def score_func(self, ground_truth, prediction):
         """
-        Computes the F1 score
+        Computes the F1 score between two sets of words from ground truth and prediction
 
-        # TODO what are gt and pred, rename variables
-        :param gt:
-        :param pred:
+        :param ground_truth: set of reference words
+        :param prediction: set of predicted words
         :return: the computed F1 score
         """
-        TP = len(gt.intersection(pred))
-        FN = len(gt - pred)
-        FP = len(pred - gt)
+        TP = len(ground_truth.intersection(prediction))
+        FN = len(ground_truth - prediction)
+        FP = len(prediction - ground_truth)
 
         # Calcul du score F1
         if (TP+FP)*(TP+FN)*TP != 0:

@@ -42,14 +42,5 @@ class DataLoaderTestCase(unittest.TestCase):
         pattern = [(0, 'le titre\n'), (1, '\n'), (2, 'la description\n'), (3, '\n'), (4, 'content x\n'), (5, '\n'), (6, 'A paragraph\n'), (7, '\n'), (8, 'second paragraph\n'), (9, '\n'), (10, 'last paragraph')]
         self.assertEqual(test_value, pattern)
 
-    def test_get_seq(self):
-        c = config
-        c.split = "paragraph"
-        dl = DataLoader(c)
-        test_value = dl.get_seq(6, 18)
-        pattern = "graph\n\nsecon"
-        self.assertEqual(test_value, pattern)
-
-
 if __name__ == '__main__':
     unittest.main()

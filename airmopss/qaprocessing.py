@@ -30,12 +30,9 @@ class QaProcessing():
 
         self.data_loader = data_loader
         self.config = config
-        # TODO : to remove before delivery
-        if config.debug_mini_load:
-            pass
-        else:
-            self.spacy_pipeline = data_loader.pipeline
-            self.qa_pipeline = pipeline("question-answering")  # , model="distilbert-base-cased-distilled-squad", tokenizer="bert-base-cased")
+
+        self.spacy_pipeline = data_loader.pipeline
+        self.qa_pipeline = pipeline("question-answering")  # , model="distilbert-base-cased-distilled-squad", tokenizer="bert-base-cased")
 
         self.questions = self.set_questions()
 
@@ -101,7 +98,6 @@ class QaProcessing():
 
         return gn_subj, gn_subj_idx
 
-    # TODO : complete function (DONE)
     def get_events(self, input_txt):
         """
         Fonction qui à partir d'un input_txt, le preprocess et extrait les évènements pour renvoyer un json destiné à l'affichage webapp
@@ -127,16 +123,15 @@ class QaProcessing():
 
         return self.extract_events(input_txt, text_clean, paragraphs)
 
-    def get_events_by_article(self, id_article):
-
-        article = self.data_loader.get_data_content_full(id_article)
-        text_clean = self.data_loader.get_data_content_clean(id_article)
-        # TODO  : chekc split in paragraph consistency
-        paragraphs = self.data_loader.get_data_content_paragraphs(id_article)
-
-        return self.extract_events(article, text_clean, paragraphs)
-
     def extract_events(self, input_txt, text_clean, paragraphs):
+        """
+
+        :param input_txt:
+        :param text_clean:
+        :param paragraphs:
+        :return:
+        """
+
         # mapping between the indices of the raw article and the cleaned article
         mapping_dict = self.data_loader.get_aligned_indices(input_txt, text_clean)
         #mapping_dict = self.data_loader.get_aligned_indices(input_txt, "\n".join(paragraphs))
@@ -174,9 +169,6 @@ class QaProcessing():
                     result = self.qa_pipeline(question=question, context=paragraph)
                     score = result['score']
 
-                    #self.logger.info(f"Result is {result}\nAnswer to question {question} : \n {answer}\nScore: {score}\n------------------------------------------")
-                    #answers_gn.append([answer, id_start, id_end, score])
-
                     if score > scores[qu]:
                         preds[qu] = result['answer']
                         scores[qu] = score
@@ -185,9 +177,6 @@ class QaProcessing():
 
                 answers_gn = [[preds[qu], id_start[qu], id_end[qu], scores[qu] ] for qu in ['what', 'when','where']]
                 answers_all.append(answers_gn)
-                
-                #self.logger.debug(answers_gn)
-                #self.logger.info(answers_all)
 
             ## Update the character count variable
             paragraph_len += len(paragraph)+1
@@ -230,9 +219,12 @@ class QaProcessing():
         return events
 
     def process_and_store(self):
+        """
+
+        :return:
+        """
         newsdata_events = {}
         for id_article in self.data_loader.data.keys():
-        #for id_article in [0, 1, 101]:
             article = self.data_loader.get_data_content_full(id_article)
             size = len(article)
             if size > 5000:

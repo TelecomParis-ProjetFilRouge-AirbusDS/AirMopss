@@ -33,7 +33,6 @@ if __name__ == '__main__':
                         help="splitting mode of content [article|paragraph], default: article")
     parser.add_argument('--labelled_only', type=utils.str2bool, default=True,
                         help="loads all data or labelled ones only, default: True")
-    parser.add_argument('--debug_mini_load', type=utils.str2bool, default=False)
     config = parser.parse_args()
 
     main(config)
