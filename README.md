@@ -25,4 +25,4 @@ optional arguments:
     `--split` SPLIT         splitting mode of content [article|paragraph], default: article  
     `--labelled_only` LABELLED_ONLY   loads all data or labelled ones only, default: True  
 
-Documentation : https://morango.fr/airmopss/
+[Read Full Documentation : https://morango.fr/airmopss/]
