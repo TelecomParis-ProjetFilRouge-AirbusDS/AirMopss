@@ -7,7 +7,7 @@
     <div>
       Nombre d'événements : {{ events_list|length }}
     </div>
-    <div class="article" >
+    <div class="article" data-article-id="{{ article_id }}">
       {% set ns = namespace(current_index=0) %}
       {% set iterations_nb = events_list|length %}
       {% for i in range(iterations_nb) %}
@@ -16,7 +16,7 @@
 
         {{ article[ns.current_index:next_event[0]].replace("\n", "\n<br/>")|safe }}
 
-        <mark class="event" data-event="{{ next_event[2] }}">
+        <mark class="event" data-start-idx="{{ next_event[0] }}" data-end-idx="{{ next_event[1] }}" data-event="{{ next_event[2] }}">
           {{ article[next_event[0]:next_event[1]].replace("\n", "\n<br/>")|safe }}
         </mark>
 
@@ -32,8 +32,8 @@
       <div><strong>Where:&nbsp;</strong><span id='where'> </span></div>
       <div><strong>When:&nbsp;</strong><span id='when'> </span></div>
 
-      <button type="button" class="btn btn-outline-success  btn-sm" value=1 onclick="alert('L\'étiquette 1 a été ajoutée pour cette prédiction')">Bonne prédiction</button>
-      <button type="button" class="btn btn-outline-danger btn-sm" value=0 onclick="alert('L\'étiquette 0 a été ajoutée pour cette prédiction')">Mauvaise prédiction</button>
+      <button type="button" class="btn btn-outline-success  btn-sm" id="event-label-good">Bonne prédiction</button>
+      <button type="button" class="btn btn-outline-danger btn-sm" id="event-label-bad">Mauvaise prédiction</button>
       <button type="button" class="btn btn-outline-secondary btn-sm" value=None onclick="alert('Aucune étiquette n\'a été ajoutée pour cette prédiction')">Je ne sais pas</button>
     </div>
   </div>
