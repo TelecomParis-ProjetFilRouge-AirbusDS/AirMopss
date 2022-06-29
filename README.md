@@ -1,17 +1,11 @@
 # AirMopss
 
-<table>
-  <tr>
-    <td align="middle">   Telecom Paris</td>
-    <td align="middle"> Airbus Space & Defence </td>
-  </tr>
-  <tr>
-    <td valign="top"><img src="https://upload.wikimedia.org/wikipedia/fr/thumb/d/d9/Logo_T%C3%A9l%C3%A9com_ParisTech.svg/219px-Logo_T%C3%A9l%C3%A9com_ParisTech.svg.png"></td>
-    <td valign="middle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Airbus_Defense_and_Space.svg/320px-Airbus_Defense_and_Space.svg.png"></td>
-  </tr>
- </table>
+**Python 3.9+ required**
 
-## How to launch airmopss [Read Full Documentation : https://morango.fr/airmopss/] : 
+## How to launch airmopss 
+
+[Read Full Documentation](https://morango.fr/airmopss/)
+
 ### 1 -  From Terminal
 `$ python main.py [-h] [--csv_file CSV_FILE] [--pkl_file PKL_FILE] [--labels_file LABELS_FILE] [--spacy_pipeline SPACY_PIPELINE] [--task TASK] [--split SPLIT] [--labelled_only LABELLED_ONLY]`
 
@@ -27,3 +21,15 @@
 
 ### 2 - From WebApp
 `$ ./launch_server.sh`
+
+
+<table>
+  <tr>
+    <td align="middle">   Telecom Paris</td>
+    <td align="middle"> Airbus Space & Defence </td>
+  </tr>
+  <tr>
+    <td valign="top"><img src="https://upload.wikimedia.org/wikipedia/fr/thumb/d/d9/Logo_T%C3%A9l%C3%A9com_ParisTech.svg/219px-Logo_T%C3%A9l%C3%A9com_ParisTech.svg.png"></td>
+    <td valign="middle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Airbus_Defense_and_Space.svg/320px-Airbus_Defense_and_Space.svg.png"></td>
+  </tr>
+ </table>

@@ -3,6 +3,8 @@
 Quickstart
 ==========
 
+**Python 3.9+ required**
+
 ==================================
 What can be done do with AirMopss?
 ==================================
