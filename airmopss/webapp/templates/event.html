@@ -5,7 +5,8 @@
     <h1>Event Extractions</h1>
 
     <div>
-      Nombre d'événements : {{ events_list|length }}
+      Nombre d'événements : {{ events_list|length }}<br/>
+      Id de l'article     : {{ article_id }}
     </div>
     <div class="article" data-article-id="{{ article_id }}">
       {% set ns = namespace(current_index=0) %}
