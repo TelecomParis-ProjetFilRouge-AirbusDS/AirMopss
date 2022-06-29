@@ -12,7 +12,7 @@
  </table>
 
 ## How to launch airmopss [Read Full Documentation : https://morango.fr/airmopss/] : 
-### From Terminal
+### 1 -  From Terminal
 `$ python main.py [-h] [--csv_file CSV_FILE] [--pkl_file PKL_FILE] [--labels_file LABELS_FILE] [--spacy_pipeline SPACY_PIPELINE] [--task TASK] [--split SPLIT] [--labelled_only LABELLED_ONLY]`
 
 #### optional arguments:  
@@ -25,5 +25,5 @@
 `--split` **SPLIT**         splitting mode of content [article|paragraph], default: article  
 `--labelled_only` **LABELLED_ONLY**   loads all data or labelled ones only, default: True  
 
-### From WebApp
+### 2 - From WebApp
 `$ ./launch_server.sh`
