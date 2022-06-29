@@ -17,12 +17,12 @@ How to launch airmopss :
 
 optional arguments:  
     `-h`, `--help`:  show this help message and exit  
-    `--csv_file` CSV_FILE   file of news wires (api format), default: data/newsdata.txt  
-    `--pkl_file` PKL_FILE   
-    `--labels_file` LABELS_FILE  file of labeled articles, default: data/newsdata_labels.txt  
-    `--spacy_pipeline` SPACY_PIPELINE  chose spacy pipeline to use [en_core_web_sm], default: en_core_web_sm  
-    `--task` TASK           task to run [qa|generate_pickle|summarize|extract_np|version], default: qa  
-    `--split` SPLIT         splitting mode of content [article|paragraph], default: article  
-    `--labelled_only` LABELLED_ONLY   loads all data or labelled ones only, default: True  
+    `--csv_file` **CSV_FILE**   file of news wires (api format), default: data/newsdata.txt  
+    `--pkl_file` **PKL_FILE**   
+    `--labels_file` **LABELS_FILE**  file of labeled articles, default: data/newsdata_labels.txt  
+    `--spacy_pipeline` **SPACY_PIPELINE**  chose spacy pipeline to use [en_core_web_sm], default: en_core_web_sm  
+    `--task` **TASK**           task to run [qa|generate_pickle|summarize|extract_np|version], default: qa  
+    `--split` **SPLIT**         splitting mode of content [article|paragraph], default: article  
+    `--labelled_only` **LABELLED_ONLY**   loads all data or labelled ones only, default: True  
 
 [Read Full Documentation : https://morango.fr/airmopss/]
