@@ -15,7 +15,7 @@
 ### From Terminal
 `$ python main.py [-h] [--csv_file CSV_FILE] [--pkl_file PKL_FILE] [--labels_file LABELS_FILE] [--spacy_pipeline SPACY_PIPELINE] [--task TASK] [--split SPLIT] [--labelled_only LABELLED_ONLY]`
 
-### optional arguments:  
+#### optional arguments:  
 `-h`, `--help`              :  show this help message and exit  
 `--csv_file` **CSV_FILE**   : file of news wires (api format), default: data/newsdata.txt  
 `--pkl_file` **PKL_FILE**   
