@@ -67,7 +67,6 @@ class QaProcessing():
             if q == "#": break
             print(q)
 
-
     def get_gn_subjs(self, doc, increment=0):
         """
         Extraire l'ensemble des groupes nominaux sujets (non-pronominaux) qui sont des entités ['GPE', 'PERSON', 'ORG', 'NORP'] et les index de début et de fin
