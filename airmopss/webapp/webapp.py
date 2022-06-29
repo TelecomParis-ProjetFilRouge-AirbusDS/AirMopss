@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+"""
+This file launches the Flask app instance and connects to functional modules
+"""
 
 from flask import Flask, render_template, request
 import argparse
