@@ -6,6 +6,7 @@ import argparse
 config = argparse.Namespace()
 config.csv_file = "tests/data/test_dataloader.csv"
 config.pkl_file='test/data/newsdata_events.pkl'
+config.labeled_events_file="airmopss/data/labeled_events.csv"
 config.split = "article"
 config.labelled_only = "False"
 config.labels_file = "tests/data/newsdata_labels.txt"

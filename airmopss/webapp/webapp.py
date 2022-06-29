@@ -21,6 +21,7 @@ app.secret_key = "SekretKi"
 config = argparse.Namespace()
 config.csv_file='airmopss/data/newsdata.csv'
 config.pkl_file='airmopss/data/newsdata_events.pkl'
+config.labeled_events_file="airmopss/data/labeled_events.csv"
 config.labels_file='airmopss/data/newsdata_labels.txt'
 config.spacy_pipeline='en_core_web_sm'
 config.task='qa'
