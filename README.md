@@ -24,3 +24,5 @@ optional arguments:
     `--task` TASK           task to run [qa|generate_pickle|summarize|extract_np|version], default: qa  
     `--split` SPLIT         splitting mode of content [article|paragraph], default: article  
     `--labelled_only` LABELLED_ONLY   loads all data or labelled ones only, default: True  
+
+Documentation : https://morango.fr/airmopss/
