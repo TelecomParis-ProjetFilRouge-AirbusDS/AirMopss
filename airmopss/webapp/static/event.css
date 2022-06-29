@@ -5,25 +5,42 @@ body {
 header {
   text-align: center;
   border: None;
-  background-image: url("Logo_telecom.png"),url("Logo_airbus.png");
+  background-image: url("Logo_telecom_lg.png"),url("Logo_airbus.png");
   background-repeat: no-repeat, no-repeat;
   background-position: left, right;
   background-color: white, white;
-  background-size: contain, contain;
-  height : 100px;
-  width : 100%
+  background-size: contain, 15% ;
+  height : 6em;
+  width : 90%;
+  margin : auto;
+  margin-top: 1em;
+  padding: 1em;
   }
 
+h1 {
+  max-width: 45%;
+  margin: auto;
+}
 
+h3 {
+  padding-top: 2em;
+  padding-bottom: 0.5em;
+}
+
+body {
+  padding-left: 4%;
+}
+
+footer {
+  margin-top: 2%;
+}
   
-  #event_page .article {
+#event_page .article {
   font-family: verdana;
-  /*text-align: center;*/
-  /*font-style: italic;*/
   font-color: #636363;
   box-sizing: content-box;
-  max-width: 75%;
-  margin-top: 2em;
+  max-width: 70%;
+  margin-top: 1em;
   border:1px solid black;
   word-wrap: break-word;
   white-space: normal;
@@ -43,8 +60,6 @@ header {
     margin: 0 0.25em;
     line-height: 1;
     border-radius: 0.35em;
-
-
 }
 
 #event_page mark:hover {
@@ -56,8 +71,6 @@ header {
     margin: 0 0.25em;
     line-height: 1;
     border-radius: 0.35em;
-    /* ouvrir une fenêtre à part, en passant la fenêtre en visible ? */
-
 }
 
 #event_page .event {
@@ -69,10 +82,10 @@ header {
 }
 
 #event_page .absolute {
-  position: absolute;
-  top: 8.5em;
-  left: 79%;
-  width: 20%;
+  position: fixed;
+  top: 19em;
+  left: 75%;
+  max-width: 20%;
   border: 1px solid blue;
 }
 

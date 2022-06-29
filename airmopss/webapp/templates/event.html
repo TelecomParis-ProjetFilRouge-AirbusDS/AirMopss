@@ -2,7 +2,7 @@
 
 {% block body %}
   <div id="event_page" >
-    <h1>Event Extractions</h1>
+    <h3>Event Extractions</h3>
 
     <div>
       Nombre d'événements : {{ events_list|length }}<br/>
@@ -30,7 +30,7 @@
     <div id="event-container" class="absolute">
       <div><strong>Actor:&nbsp;</strong><span id='who'></span></div>
       <div><strong>Action:&nbsp;</strong><span id='what'> </span></div>
-      <div><strong>Locate:&nbsp;</strong><span id='where'> </span></div>
+      <div><strong>Location:&nbsp;</strong><span id='where'> </span></div>
       <div><strong>Time:&nbsp;</strong><span id='when'> </span></div>
 
       <button type="button" class="btn btn-outline-success  btn-sm" id="event-label-good">Bonne prédiction</button>
