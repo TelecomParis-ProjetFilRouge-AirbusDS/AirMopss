@@ -91,13 +91,13 @@ def labels():
     ]
     app.logger.debug(csv_row);
 
-    if not exists('labeled_events.csv'):
+    if not exists(config.labeled_events_file):
         header = ['article_id', 'event_start_idx', 'event_end_idx', 'event', 'label']
-        with open('labeled_events.csv', 'w', encoding='UTF8') as f:
+        with open(config.labeled_events_file, 'w', encoding='UTF8') as f:
             writer = csv.writer(f)
             writer.writerow(header)
 
-    with open('labeled_events.csv', 'a', encoding='UTF8') as f:
+    with open(config.labeled_events_file, 'a', encoding='UTF8') as f:
         writer = csv.writer(f)
         writer.writerow(csv_row)
 
